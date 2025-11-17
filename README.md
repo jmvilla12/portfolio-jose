@@ -53,6 +53,7 @@ pnpm run dev
 - `pnpm run format` - Format code with Prettier
 - `pnpm run format:check` - Check if code is formatted
 - `pnpm run preview` - Preview production build
+- `pnpm run prepare` - Initialize Husky hooks
 
 ## ✅ Completed Tasks
 
@@ -70,6 +71,14 @@ pnpm run dev
 - ✅ ESLint and Prettier conflict resolution implemented
 - ✅ Automatic formatting on save configured
 - ✅ Custom lint and format scripts added to package.json
+
+### PTF-5: Husky + Lint-staged Setup
+
+- ✅ Husky installed and configured for Git hooks
+- ✅ Pre-commit hook setup with lint-staged
+- ✅ Commits blocked if ESLint errors/warnings found
+- ✅ Prettier runs automatically on staged files
+- ✅ Zero-warning policy enforced
 
 ### Current Development
 
@@ -93,6 +102,13 @@ The project includes a comprehensive code quality setup:
 - Trailing commas (ES5)
 - 80 character line width
 - Unix line endings (LF)
+
+### Git Hooks (Husky + lint-staged):
+
+- **Pre-commit validation** - Automatically runs on every commit
+- **ESLint enforcement** - Blocks commits with warnings or errors
+- **Prettier formatting** - Auto-formats staged files before commit
+- **Zero-warning policy** - Maintains high code quality standards
 
 ## 📁 Project Structure
 
