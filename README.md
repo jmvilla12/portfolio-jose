@@ -24,17 +24,20 @@ This project was created using Vite with React + TypeScript template and include
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/jmvilla12/portfolio-jose.git
 cd portfolio-jose
 ```
 
 2. Install dependencies:
+
 ```bash
 pnpm install
 ```
 
 3. Start the development server:
+
 ```bash
 pnpm run dev
 ```
@@ -54,19 +57,22 @@ pnpm run dev
 ## ✅ Completed Tasks
 
 ### PTF-1: Base Project Setup
+
 - ✅ Project created with `pnpm create vite portfolio-jose --template react-ts`
 - ✅ App running locally with `pnpm run dev`
 - ✅ Initial repository uploaded to GitHub
 - ✅ Project structure configured with TypeScript and React 19
 
-### PTF-2: ESLint + Prettier Configuration  
+### PTF-2: ESLint + Prettier Configuration
+
 - ✅ ESLint configured with recommended rules for React and TypeScript
-- ✅ Prettier integrated for consistent code formatting  
+- ✅ Prettier integrated for consistent code formatting
 - ✅ ESLint and Prettier conflict resolution implemented
 - ✅ Automatic formatting on save configured
 - ✅ Custom lint and format scripts added to package.json
 
 ### Current Development
+
 Working on: **Next feature development**
 
 ## 🔧 ESLint + Prettier Configuration
@@ -74,22 +80,19 @@ Working on: **Next feature development**
 The project includes a comprehensive code quality setup:
 
 ### ESLint Rules:
+
 - **JavaScript & TypeScript** - Recommended ESLint rules
 - **React Hooks** - React Hooks specific linting
 - **React Refresh** - Vite HMR compatibility
 - **Prettier Integration** - Automatic formatting without conflicts
 
 ### Prettier Configuration:
+
 - Single quotes, no semicolons
 - 2-space indentation
 - Trailing commas (ES5)
 - 80 character line width
 - Unix line endings (LF)
-
-### VS Code Integration:
-- Format on save enabled
-- ESLint auto-fix on save
-- Prettier as default formatter
 
 ## 📁 Project Structure
 
