@@ -46,6 +46,9 @@ pnpm run dev
 - `pnpm run dev` - Start development server
 - `pnpm run build` - Build for production
 - `pnpm run lint` - Run ESLint
+- `pnpm run lint:fix` - Run ESLint with auto-fix
+- `pnpm run format` - Format code with Prettier
+- `pnpm run format:check` - Check if code is formatted
 - `pnpm run preview` - Preview production build
 
 ## ✅ Completed Tasks
@@ -56,19 +59,37 @@ pnpm run dev
 - ✅ Initial repository uploaded to GitHub
 - ✅ Project structure configured with TypeScript and React 19
 
+### PTF-2: ESLint + Prettier Configuration  
+- ✅ ESLint configured with recommended rules for React and TypeScript
+- ✅ Prettier integrated for consistent code formatting  
+- ✅ ESLint and Prettier conflict resolution implemented
+- ✅ Automatic formatting on save configured
+- ✅ Custom lint and format scripts added to package.json
+
 ### Current Development
-Working on: **PTF-2** - Configure ESLint and Prettier with recommended rules
+Working on: **Next feature development**
 
-## 🔧 ESLint Configuration
+## 🔧 ESLint + Prettier Configuration
 
-The project includes a comprehensive ESLint setup with:
+The project includes a comprehensive code quality setup:
 
-- **JavaScript** - Base ESLint rules
-- **TypeScript** - TypeScript-specific rules  
-- **React Hooks** - React Hooks linting rules
-- **React Refresh** - Vite-specific React refresh rules
+### ESLint Rules:
+- **JavaScript & TypeScript** - Recommended ESLint rules
+- **React Hooks** - React Hooks specific linting
+- **React Refresh** - Vite HMR compatibility
+- **Prettier Integration** - Automatic formatting without conflicts
 
-Current ESLint configuration includes recommended rules for TypeScript and React development.
+### Prettier Configuration:
+- Single quotes, no semicolons
+- 2-space indentation
+- Trailing commas (ES5)
+- 80 character line width
+- Unix line endings (LF)
+
+### VS Code Integration:
+- Format on save enabled
+- ESLint auto-fix on save
+- Prettier as default formatter
 
 ## 📁 Project Structure
 
