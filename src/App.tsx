@@ -3,10 +3,9 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-// Main App component with syntax error
+// Main App component
 function App() {
   const [count, setCount] = useState(0)
-  console.log(undefinedVariable) // This will cause a lint error
 
   return (
     <>
