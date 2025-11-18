@@ -1,4 +1,5 @@
 /* Component Styles - Blue Minimalist Theme */
+@import './components/cv-button.css';
 
 /* Button Components */
 .btn {

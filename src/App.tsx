@@ -1,12 +1,16 @@
+import { Routes, Route } from 'react-router-dom'
 import { Layout } from '@components/layout'
-import { Home } from '@pages/index'
+import { Home, CVPage } from '@pages/index'
 import '@styles/main.css'
 
 // Main App component
 function App() {
   return (
     <Layout>
-      <Home />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cv" element={<CVPage />} />
+      </Routes>
     </Layout>
   )
 }

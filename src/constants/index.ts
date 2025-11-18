@@ -21,10 +21,17 @@ export const SOCIAL_LINKS = {
 
 export const ROUTES = {
   home: '/',
+  cv: '/cv',
   about: '/a-propos',
   projects: '/projets',
   experience: '/experience',
   contact: '/contact',
+} as const
+
+export const CV_CONFIG = {
+  fileName: 'CV_Jose_FR.pdf',
+  downloadName: 'CV_Jose_Villa_Romero.pdf',
+  path: '/CV_Jose_FR.pdf',
 } as const
 
 export const PROJECT_CATEGORIES = [
