@@ -80,6 +80,15 @@ pnpm run dev
 - ✅ Prettier runs automatically on staged files
 - ✅ Zero-warning policy enforced
 
+### PTF-6: Professional Project Structure
+
+- ✅ Organized folder structure following best practices
+- ✅ Import path aliases configured (TypeScript + Vite)
+- ✅ Component architecture with UI and Layout separation
+- ✅ Custom hooks for reusable logic
+- ✅ Type definitions and utility functions organized
+- ✅ Scalable structure ready for portfolio growth
+
 ### Current Development
 
 Working on: **Next feature development**
@@ -114,19 +123,129 @@ The project includes a comprehensive code quality setup:
 
 ```
 portfolio-jose/
-├── public/           # Static assets
-├── src/             # Source code
-│   ├── assets/      # Images, icons, etc.
-│   ├── App.tsx      # Main App component
-│   ├── App.css      # App styles
-│   ├── main.tsx     # Application entry point
-│   └── index.css    # Global styles
-├── eslint.config.js # ESLint configuration
-├── index.html       # HTML template
-├── package.json     # Dependencies and scripts
-├── tsconfig.json    # TypeScript configuration
-└── vite.config.ts   # Vite configuration
+├── .husky/                    # Git hooks configuration
+├── .vscode/                   # VS Code workspace settings
+├── public/                    # Static assets
+├── src/                       # Source code
+│   ├── components/            # React components
+│   │   ├── ui/               # Reusable UI components
+│   │   │   ├── Button.tsx    # Button component
+│   │   │   ├── ProjectCard.tsx # Project card component
+│   │   │   └── index.ts      # UI exports
+│   │   ├── layout/           # Layout components
+│   │   │   ├── Header.tsx    # Site header
+│   │   │   ├── Footer.tsx    # Site footer
+│   │   │   └── index.ts      # Layout exports
+│   │   └── index.ts          # All component exports
+│   ├── pages/                # Page components
+│   │   ├── Home.tsx          # Home page
+│   │   └── index.ts          # Page exports
+│   ├── hooks/                # Custom React hooks
+│   │   └── index.ts          # Theme & media query hooks
+│   ├── utils/                # Utility functions
+│   │   └── index.ts          # Helper functions
+│   ├── types/                # TypeScript type definitions
+│   │   └── index.ts          # Project types
+│   ├── styles/               # CSS styles
+│   │   ├── variables.css     # CSS custom properties
+│   │   ├── components.css    # Component styles
+│   │   ├── main.css          # Main styles import
+│   │   ├── App.css           # App component styles
+│   │   └── index.css         # Global styles
+│   ├── data/                 # Static data and constants
+│   │   └── index.ts          # Projects & experience data
+│   ├── constants/            # App constants
+│   │   └── index.ts          # Configuration constants
+│   ├── assets/               # Images, icons, etc.
+│   ├── App.tsx               # Main App component
+│   └── main.tsx              # Application entry point
+├── .eslintrc.js              # Legacy ESLint configuration
+├── eslint.config.js          # Modern ESLint configuration
+├── .prettierrc               # Prettier configuration
+├── .prettierignore           # Prettier ignore patterns
+├── tsconfig.app.json         # TypeScript app configuration
+├── tsconfig.json             # TypeScript configuration
+├── vite.config.ts            # Vite configuration with path aliases
+├── package.json              # Dependencies and scripts
+└── README.md                 # Project documentation
 ```
+
+### 🗂️ **Folder Architecture Explained:**
+
+#### **Components (`src/components/`)**
+
+- **`ui/`** - Reusable UI components (Button, Card, Modal, etc.)
+- **`layout/`** - Layout-specific components (Header, Footer, Sidebar)
+- **`index.ts`** - Barrel exports for clean imports
+
+#### **Pages (`src/pages/`)**
+
+- Each page component represents a route/view
+- Future: Home, About, Projects, Contact, etc.
+
+#### **Hooks (`src/hooks/`)**
+
+- Custom React hooks for shared logic
+- Theme management, API calls, form handling
+
+#### **Utils (`src/utils/`)**
+
+- Pure utility functions
+- Date formatting, validation, data manipulation
+
+#### **Types (`src/types/`)**
+
+- TypeScript interfaces and types
+- Project models, API responses, props interfaces
+
+#### **Styles (`src/styles/`)**
+
+- CSS architecture with imports
+- Variables, components, global styles
+
+#### **Data (`src/data/`)**
+
+- Static data, mock data, configurations
+- Projects portfolio, experience, skills
+
+#### **Constants (`src/constants/`)**
+
+- App-wide constants and configuration
+- API URLs, app config, route definitions
+
+### 📦 **Import Path Aliases**
+
+The project uses path mapping for cleaner imports:
+
+```typescript
+// Instead of relative imports
+import { Button } from '../../components/ui/Button'
+import { Project } from '../../../types/index'
+
+// Use clean absolute paths
+import { Button } from '@components/ui'
+import type { Project } from '@src/types'
+```
+
+#### **Available Aliases:**
+
+- `@/*` → Project root
+- `@src/*` → `./src/*`
+- `@components/*` → `./src/components/*`
+- `@pages/*` → `./src/pages/*`
+- `@hooks/*` → `./src/hooks/*`
+- `@utils/*` → `./src/utils/*`
+- `@styles/*` → `./src/styles/*`
+- `@data/*` → `./src/data/*`
+- `@constants/*` → `./src/constants/*`
+- `@assets/*` → `./src/assets/*`
+
+> **Configuration:** Set up in `tsconfig.app.json` and `vite.config.ts`
+> ├── package.json # Dependencies and scripts
+> ├── tsconfig.json # TypeScript configuration
+> └── vite.config.ts # Vite configuration
+
+````
 
 ## 🛠️ Development
 
@@ -150,3 +269,4 @@ The built files will be in the `dist` directory, ready for deployment to any sta
 ---
 
 Built with ❤️ by [Jose Villa](https://github.com/jmvilla12)
+````

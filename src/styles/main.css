@@ -1,0 +1,5 @@
+/* Main styles entry point */
+@import './variables.css';
+@import './index.css';
+@import './App.css';
+@import './components.css';
