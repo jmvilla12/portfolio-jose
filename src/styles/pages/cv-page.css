@@ -1,7 +1,7 @@
 /* CV Page Styles */
 .cv-page {
   min-height: 100vh;
-  background: var(--color-background);
+  background: var(--background-gray);
 }
 
 .cv-page__header {
@@ -9,9 +9,9 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-4) var(--spacing-6);
-  background: white;
-  border-bottom: 1px solid var(--color-border);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: var(--background-white);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
 }
 
 .cv-page__back-btn,
@@ -21,20 +21,21 @@
   gap: var(--spacing-2);
   padding: var(--spacing-2) var(--spacing-4);
   background: transparent;
-  color: var(--color-primary);
-  border: 2px solid var(--color-primary);
-  border-radius: var(--border-radius);
+  color: var(--primary-blue);
+  border: 2px solid var(--primary-blue);
+  border-radius: var(--radius-lg);
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all var(--transition-fast);
   text-decoration: none;
   font-family: inherit;
 }
 
 .cv-page__back-btn:hover,
 .cv-page__download-btn:hover {
-  background: var(--color-primary);
-  color: white;
+  background: var(--primary-blue);
+  color: var(--background-white);
+  border-radius: var(--radius-xl);
 }
 
 .cv-page__back-icon,
@@ -45,7 +46,7 @@
 .cv-page__title {
   font-size: var(--font-size-2xl);
   font-weight: 700;
-  color: var(--color-text);
+  color: var(--text-primary);
   margin: 0;
 }
 
@@ -57,9 +58,9 @@
 .cv-page__pdf-container {
   width: 100%;
   height: 100%;
-  background: white;
-  border-radius: var(--border-radius);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: var(--background-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
   overflow: hidden;
   position: relative;
 }

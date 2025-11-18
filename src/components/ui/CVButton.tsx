@@ -1,5 +1,6 @@
 import { FaDownload, FaEye } from 'react-icons/fa'
 import { CV_CONFIG } from '@constants/index'
+import '@styles/components/cv-button.css'
 
 interface CVButtonProps {
   variant?: 'download' | 'view' | 'both'
