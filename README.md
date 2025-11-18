@@ -262,10 +262,11 @@ To build the project for production:
 
 ```bash
 pnpm run build
-````
+```
 
 The built files will be in the `dist` directory, ready for deployment to any static hosting service.
 
 ---
 
 Built with ❤️ by [Jose Villa](https://github.com/jmvilla12)
+````
