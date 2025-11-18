@@ -1,50 +1,88 @@
-/* Global styles and CSS variables */
+/* Global styles and CSS variables - Blue Minimalist Theme */
 :root {
-  /* Colors */
-  --primary-color: #3b82f6;
-  --secondary-color: #1f2937;
-  --accent-color: #10b981;
-  --text-color: #374151;
-  --text-light: #6b7280;
-  --background: #ffffff;
-  --surface: #f9fafb;
-  --border: #e5e7eb;
+  /* Blue Color Palette */
+  --primary-blue: #2563eb; /* Main blue */
+  --primary-blue-light: #3b82f6; /* Light blue */
+  --primary-blue-dark: #1d4ed8; /* Dark blue */
+  --accent-blue: #0ea5e9; /* Sky blue accent */
+  --navy-blue: #1e293b; /* Dark navy */
+
+  /* Neutral Colors */
+  --text-primary: #0f172a; /* Almost black */
+  --text-secondary: #475569; /* Medium gray */
+  --text-light: #94a3b8; /* Light gray */
+  --background-white: #ffffff; /* Pure white */
+  --background-gray: #f8fafc; /* Light gray background */
+  --background-blue-light: #f0f9ff; /* Very light blue */
+  --border-color: #e2e8f0; /* Light border */
+  --border-blue: #bfdbfe; /* Blue border */
 
   /* Typography */
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 1.875rem;
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-2xl: 1.5rem; /* 24px */
+  --font-size-3xl: 1.875rem; /* 30px */
+  --font-size-4xl: 2.25rem; /* 36px */
 
-  /* Spacing */
-  --spacing-xs: 0.5rem;
-  --spacing-sm: 0.75rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
+  /* Spacing Scale */
+  --spacing-1: 0.25rem; /* 4px */
+  --spacing-2: 0.5rem; /* 8px */
+  --spacing-3: 0.75rem; /* 12px */
+  --spacing-4: 1rem; /* 16px */
+  --spacing-5: 1.25rem; /* 20px */
+  --spacing-6: 1.5rem; /* 24px */
+  --spacing-8: 2rem; /* 32px */
+  --spacing-10: 2.5rem; /* 40px */
+  --spacing-12: 3rem; /* 48px */
+  --spacing-16: 4rem; /* 64px */
+  --spacing-20: 5rem; /* 80px */
 
-  /* Border radius */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
+  /* Container & Layout */
+  --container-max-width: 1200px;
+  --container-padding: var(--spacing-4);
+  --header-height: 70px;
+  --footer-height: 60px;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-}
+  /* Border Radius */
+  --radius-sm: 0.25rem; /* 4px */
+  --radius-md: 0.5rem; /* 8px */
+  --radius-lg: 0.75rem; /* 12px */
+  --radius-xl: 1rem; /* 16px */
 
-/* Dark theme */
+  /* Shadows with blue tint */
+  --shadow-sm: 0 1px 2px 0 rgba(37, 99, 235, 0.08);
+  --shadow-md: 0 4px 6px -1px rgba(37, 99, 235, 0.12);
+  --shadow-lg: 0 10px 15px -3px rgba(37, 99, 235, 0.15);
+  --shadow-xl: 0 20px 25px -5px rgba(37, 99, 235, 0.18);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease-in-out;
+  --transition-normal: 0.3s ease-in-out;
+  --transition-slow: 0.5s ease-in-out;
+} /* Dark theme */
 [data-theme='dark'] {
-  --primary-color: #60a5fa;
-  --secondary-color: #f9fafb;
-  --text-color: #f3f4f6;
-  --text-light: #d1d5db;
-  --background: #111827;
-  --surface: #1f2937;
-  --border: #374151;
+  --primary-blue: #60a5fa; /* Lighter blue for dark mode */
+  --primary-blue-light: #93c5fd; /* Very light blue */
+  --primary-blue-dark: #3b82f6; /* Standard blue */
+  --accent-blue: #0ea5e9; /* Sky blue accent */
+  --navy-blue: #f1f5f9; /* Light text on dark */
+
+  --text-primary: #f8fafc; /* Almost white */
+  --text-secondary: #cbd5e1; /* Light gray */
+  --text-light: #94a3b8; /* Medium gray */
+  --background-white: #0f172a; /* Dark navy background */
+  --background-gray: #1e293b; /* Darker gray */
+  --background-blue-light: #1e3a8a; /* Dark blue background */
+  --border-color: #334155; /* Dark border */
+  --border-blue: #1e40af; /* Dark blue border */
+
+  /* Dark mode shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
 }
