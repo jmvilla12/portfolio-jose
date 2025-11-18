@@ -250,7 +250,7 @@
   }
 
   .tech-tag {
-    font-size: 0.625rem; /* 10px */
+    font-size: 0.75rem; /* 12px */
     padding: 2px var(--spacing-2);
   }
 

@@ -63,7 +63,9 @@
   --transition-fast: 0.15s ease-in-out;
   --transition-normal: 0.3s ease-in-out;
   --transition-slow: 0.5s ease-in-out;
-} /* Dark theme */
+}
+
+/* Dark theme */
 [data-theme='dark'] {
   --primary-blue: #60a5fa; /* Lighter blue for dark mode */
   --primary-blue-light: #93c5fd; /* Very light blue */
