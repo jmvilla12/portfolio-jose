@@ -1,0 +1,128 @@
+/* CV Button Component Styles */
+.cv-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3) var(--spacing-4);
+  background: var(--primary-blue);
+  color: var(--background-white);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.cv-button:hover {
+  background: var(--primary-blue-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-xl);
+}
+
+.cv-button:active {
+  transform: translateY(0);
+}
+
+.cv-button__icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* Button Variants */
+.cv-button--download {
+  background: var(--primary-blue);
+  color: var(--background-white);
+}
+
+.cv-button--download:hover {
+  background: var(--primary-blue-dark);
+  color: var(--background-white);
+  border-radius: var(--radius-xl);
+}
+
+.cv-button--view {
+  background: transparent;
+  color: var(--primary-blue);
+  border: 2px solid var(--primary-blue);
+}
+
+.cv-button--view:hover {
+  background: var(--primary-blue);
+  color: var(--background-white);
+  border-radius: var(--radius-xl);
+  border-color: var(--primary-blue);
+}
+
+/* Button Sizes */
+.cv-button--sm {
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-sm);
+}
+
+.cv-button--sm .cv-button__icon {
+  font-size: 0.875rem;
+}
+
+.cv-button--md {
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: var(--font-size-base);
+}
+
+.cv-button--lg {
+  padding: var(--spacing-4) var(--spacing-6);
+  font-size: var(--font-size-lg);
+}
+
+.cv-button--lg .cv-button__icon {
+  font-size: 1.25rem;
+}
+
+/* Button Group */
+.cv-button-group {
+  display: flex;
+  gap: var(--spacing-2);
+  align-items: center;
+}
+
+.cv-button-group--sm {
+  gap: var(--spacing-1);
+}
+
+.cv-button-group--lg {
+  gap: var(--spacing-3);
+}
+
+/* Hero CV Section */
+.hero-cv {
+  margin-top: var(--spacing-4);
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .cv-button-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .cv-button-group .cv-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .cv-button {
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-2) var(--spacing-3);
+  }
+
+  .cv-button--md {
+    padding: var(--spacing-2) var(--spacing-3);
+    font-size: var(--font-size-sm);
+  }
+}

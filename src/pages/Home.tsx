@@ -1,4 +1,4 @@
-import { SocialLinks } from '@components/ui'
+import { SocialLinks, CVButton } from '@components/ui'
 import { APP_CONFIG, TECHNICAL_SKILLS } from '@constants/index'
 import '@styles/pages/home.css'
 
@@ -29,6 +29,10 @@ const Home = () => {
 
           <div className="hero-social">
             <SocialLinks variant="hero" showEmail={true} />
+          </div>
+
+          <div className="hero-cv">
+            <CVButton variant="both" size="md" />
           </div>
         </div>
       </section>

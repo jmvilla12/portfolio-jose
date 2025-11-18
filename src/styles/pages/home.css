@@ -76,10 +76,17 @@
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
   font-weight: 500;
-  padding: var(--spacing-1) var(--spacing-3);
+  padding: var(--spacing-2) var(--spacing-4);
   background-color: var(--background-gray);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xl);
   border: 1px solid var(--border-color);
+  transition: all var(--transition-fast);
+}
+
+.hero-meta span:hover {
+  background-color: var(--background-blue-light);
+  border-color: var(--border-blue);
+  transform: translateY(-1px);
 }
 
 .location {
@@ -140,15 +147,16 @@
 .skill-category {
   background-color: var(--background-gray);
   padding: var(--spacing-6);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   border: 1px solid var(--border-color);
   transition: all var(--transition-normal);
 }
 
 .skill-category:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
   border-color: var(--border-blue);
+  background-color: var(--background-white);
 }
 
 .skill-category h3 {
@@ -172,16 +180,17 @@
   font-size: var(--font-size-sm);
   font-weight: 500;
   padding: var(--spacing-2) var(--spacing-3);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-lg);
   border: 1px solid var(--border-blue);
   transition: all var(--transition-fast);
 }
 
 .tech-tag:hover {
   background-color: var(--primary-blue);
-  color: white;
+  color: var(--background-white);
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-xl);
 }
 
 .tech-tag.specialty {
