@@ -22,8 +22,8 @@ export const SOCIAL_LINKS = {
 export const ROUTES = {
   home: '/',
   cv: '/cv',
-  about: '/a-propos',
-  projects: '/projets',
+  about: '/about',
+  projects: '/projects',
   experience: '/experience',
   contact: '/contact',
 } as const
