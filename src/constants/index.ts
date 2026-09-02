@@ -1,10 +1,10 @@
 // Portfolio configuration
 
 export const APP_CONFIG = {
-  name: 'José Villa-Romero',
-  shortName: 'JVR',
-  firstName: 'José',
-  lastName: 'Villa-Romero',
+  name: 'Jose Villa',
+  shortName: 'JV',
+  firstName: 'Jose',
+  lastName: 'Villa',
   role: 'Software Engineer',
   roleAlt: 'Mechatronics background',
   location: 'Lille, Hauts-de-France',
