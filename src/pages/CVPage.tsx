@@ -1,69 +1,48 @@
-import { FaDownload, FaArrowLeft } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
+import { FiArrowLeft, FiDownload } from 'react-icons/fi'
 import { CV_CONFIG } from '@constants/index'
-import '@styles/pages/cv-page.css'
 
 const CVPage = () => {
-  const handleDownload = () => {
-    const link = document.createElement('a')
-    link.href = CV_CONFIG.path
-    link.download = CV_CONFIG.downloadName
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
-
-  const handleGoBack = () => {
-    window.history.back()
-  }
+  const navigate = useNavigate()
 
   return (
-    <div className="cv-page">
-      <div className="cv-page__header">
+    <div className="container cv">
+      <div className="cv__bar">
         <button
-          onClick={handleGoBack}
-          className="cv-page__back-btn"
-          aria-label="Retour"
+          onClick={() => navigate(-1)}
+          className="btn btn--quiet"
           type="button"
         >
-          <FaArrowLeft className="cv-page__back-icon" />
-          <span>Retour</span>
+          <FiArrowLeft className="btn__icon" aria-hidden />
+          Back
         </button>
 
-        <h1 className="cv-page__title">Mon CV</h1>
+        <h1 style={{ fontSize: 'var(--text-h3)' }}>Curriculum Vitae</h1>
 
-        <button
-          onClick={handleDownload}
-          className="cv-page__download-btn"
-          aria-label="Télécharger le CV"
-          type="button"
+        <a
+          href={CV_CONFIG.path}
+          download={CV_CONFIG.downloadName}
+          className="btn btn--primary btn--sm"
         >
-          <FaDownload className="cv-page__download-icon" />
-          <span>Télécharger</span>
-        </button>
+          <FiDownload className="btn__icon" aria-hidden />
+          Download PDF
+        </a>
       </div>
 
-      <div className="cv-page__content">
-        <div className="cv-page__pdf-container">
-          <embed
-            src={CV_CONFIG.path}
-            type="application/pdf"
-            className="cv-page__pdf-embed"
-            width="100%"
-            height="100%"
-          />
-
-          {/* Fallback for browsers that don't support embed */}
-          <div className="cv-page__fallback">
-            <p>Votre navigateur ne peut pas afficher le PDF.</p>
-            <button
-              onClick={handleDownload}
-              className="cv-page__fallback-btn"
-              type="button"
+      <div className="cv__frame">
+        <object data={CV_CONFIG.path} type="application/pdf">
+          <div className="cv__fallback">
+            <p>Your browser can't display the PDF inline.</p>
+            <a
+              href={CV_CONFIG.path}
+              download={CV_CONFIG.downloadName}
+              className="btn btn--primary"
             >
-              Télécharger le PDF
-            </button>
+              <FiDownload className="btn__icon" aria-hidden />
+              Download the PDF
+            </a>
           </div>
-        </div>
+        </object>
       </div>
     </div>
   )

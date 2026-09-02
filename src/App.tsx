@@ -1,18 +1,21 @@
-import { Routes, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { Layout } from '@components/layout'
-import { Home, CVPage, About, Projects, Contact } from '@pages/index'
-import '@styles/main.css'
+import { useScrollToTop } from '@hooks/index'
+import { About, Contact, CVPage, Home, NotFound, Projects } from '@pages/index'
+import { ROUTES } from '@constants/index'
 
-// Main App component
 function App() {
+  useScrollToTop()
+
   return (
     <Layout>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cv" element={<CVPage />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path={ROUTES.home} element={<Home />} />
+        <Route path={ROUTES.about} element={<About />} />
+        <Route path={ROUTES.projects} element={<Projects />} />
+        <Route path={ROUTES.contact} element={<Contact />} />
+        <Route path={ROUTES.cv} element={<CVPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>
   )

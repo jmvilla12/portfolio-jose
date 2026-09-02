@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Personal background material — never commit (repo is public)
+/docs/personal/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -1,46 +1,60 @@
-import { useState, useEffect } from 'react'
+import { useCallback, useEffect, useState, useSyncExternalStore } from 'react'
+import { useLocation } from 'react-router-dom'
 
-// Custom hook for theme management
+type Theme = 'light' | 'dark'
+
+const STORAGE_KEY = 'theme'
+
+const getInitialTheme = (): Theme => {
+  const saved = localStorage.getItem(STORAGE_KEY)
+  if (saved === 'light' || saved === 'dark') return saved
+  // No explicit choice yet — follow the OS preference.
+  return window.matchMedia('(prefers-color-scheme: light)').matches
+    ? 'light'
+    : 'dark'
+}
+
+/** Theme state, persisted to localStorage and mirrored onto <html>. */
 export const useTheme = () => {
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark'
-    return savedTheme || 'light'
-  })
+  const [theme, setTheme] = useState<Theme>(getInitialTheme)
 
   useEffect(() => {
-    localStorage.setItem('theme', theme)
+    localStorage.setItem(STORAGE_KEY, theme)
     document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
 
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light'
-    setTheme(newTheme)
-  }
+  const toggleTheme = () =>
+    setTheme(current => (current === 'light' ? 'dark' : 'light'))
 
   return { theme, toggleTheme }
 }
 
-// Custom hook for responsive design
-export const useMediaQuery = (query: string) => {
-  const [matches, setMatches] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return window.matchMedia(query).matches
-    }
-    return false
-  })
+/** Reset scroll position on every route change. */
+export const useScrollToTop = () => {
+  const { pathname } = useLocation()
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [pathname])
+}
 
-    const mediaQuery = window.matchMedia(query)
+/**
+ * Subscribe to a media query. Uses useSyncExternalStore rather than
+ * state-in-an-effect so the first render already reports the real value.
+ */
+export const useMediaQuery = (query: string) => {
+  const subscribe = useCallback(
+    (onChange: () => void) => {
+      const mediaQuery = window.matchMedia(query)
+      mediaQuery.addEventListener('change', onChange)
+      return () => mediaQuery.removeEventListener('change', onChange)
+    },
+    [query]
+  )
 
-    const handler = (event: MediaQueryListEvent) => {
-      setMatches(event.matches)
-    }
-
-    mediaQuery.addEventListener('change', handler)
-    return () => mediaQuery.removeEventListener('change', handler)
-  }, [query])
-
-  return matches
+  return useSyncExternalStore(
+    subscribe,
+    () => window.matchMedia(query).matches,
+    () => false
+  )
 }

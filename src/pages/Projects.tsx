@@ -1,42 +1,71 @@
-import { FaTools, FaCode, FaMobile, FaBrain } from 'react-icons/fa'
-import '@styles/pages/construction.css'
+import { useMemo, useState } from 'react'
+import { ProjectCard } from '@components/ui'
+import { PROJECTS } from '@data/index'
+import type { ProjectCategory } from '@src/types'
+
+const FILTERS: { label: string; value: ProjectCategory | 'all' }[] = [
+  { label: 'All', value: 'all' },
+  { label: 'Web', value: 'web' },
+  { label: 'Backend', value: 'backend' },
+  { label: 'Embedded', value: 'embedded' },
+  { label: 'Data', value: 'data' },
+]
 
 const Projects = () => {
+  const [filter, setFilter] = useState<ProjectCategory | 'all'>('all')
+
+  const visible = useMemo(
+    () =>
+      filter === 'all'
+        ? PROJECTS
+        : PROJECTS.filter(project => project.category === filter),
+    [filter]
+  )
+
+  // Hide filters that would produce an empty list.
+  const available = FILTERS.filter(
+    option =>
+      option.value === 'all' ||
+      PROJECTS.some(project => project.category === option.value)
+  )
+
   return (
-    <div className="construction-page">
-      <div className="construction-content">
-        <div className="construction-icon">
-          <FaTools />
-        </div>
-        <h1 className="construction-title">Projets en Construction</h1>
-        <p className="construction-description">
-          Cette section sera bientôt remplie avec mes projets les plus
-          intéressants. En attendant, vous pouvez consulter mon profil GitHub
-          pour voir mes contributions récentes.
+    <>
+      <header className="container page-head">
+        <p className="eyebrow">Projects</p>
+        <h1 className="page-head__title">Things I've built</h1>
+        <p className="page-head__lead">
+          Academic, competition and personal work. Each one says plainly what it
+          actually is — a prototype stays a prototype.
         </p>
-        <div className="construction-features">
-          <h3>Types de projets à venir :</h3>
-          <ul>
-            <li>
-              <FaCode className="feature-icon" />
-              Applications Web (React, Vue, TypeScript)
-            </li>
-            <li>
-              <FaMobile className="feature-icon" />
-              Applications Mobiles (Flutter)
-            </li>
-            <li>
-              <FaBrain className="feature-icon" />
-              Projets d'Intelligence Artificielle
-            </li>
-            <li>
-              <FaCode className="feature-icon" />
-              Systèmes Embarqués et IoT
-            </li>
-          </ul>
+
+        <div className="btn-row" style={{ marginTop: '2rem' }}>
+          {available.map(option => (
+            <button
+              key={option.value}
+              type="button"
+              onClick={() => setFilter(option.value)}
+              className={`btn btn--sm ${
+                filter === option.value ? 'btn--primary' : 'btn--ghost'
+              }`}
+              aria-pressed={filter === option.value}
+            >
+              {option.label}
+            </button>
+          ))}
         </div>
-      </div>
-    </div>
+      </header>
+
+      <section className="section">
+        <div className="container">
+          <div className="card-grid">
+            {visible.map((project, index) => (
+              <ProjectCard key={project.id} project={project} index={index} />
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   )
 }
 

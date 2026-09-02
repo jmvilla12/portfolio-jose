@@ -1,5 +1,5 @@
-// UI Components exports
-export { default as Button } from './Button'
+// UI components
 export { default as ProjectCard } from './ProjectCard'
+export { default as ExperienceItem } from './ExperienceItem'
 export { default as SocialLinks } from './SocialLinks'
 export { default as CVButton } from './CVButton'

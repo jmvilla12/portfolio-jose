@@ -24,8 +24,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
-    /* Path Mapping */
-    "baseUrl": ".",
+    /* Path Mapping — relative to this file; `baseUrl` is deprecated as of TS 6.0 */
     "paths": {
       "@/*": ["./*"],
       "@src/*": ["./src/*"],
@@ -34,7 +33,6 @@
       "@pages/*": ["./src/pages/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@utils/*": ["./src/utils/*"],
-      "@types/*": ["./src/types/*"],
       "@styles/*": ["./src/styles/*"],
       "@data/*": ["./src/data/*"],
       "@constants/*": ["./src/constants/*"]

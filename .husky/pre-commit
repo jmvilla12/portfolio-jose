@@ -1,1 +1,8 @@
-pnpm exec lint-staged
+# Call the local binary directly: it only needs `node` on PATH, so the hook
+# works whichever package manager installed node_modules.
+if [ ! -x node_modules/.bin/lint-staged ]; then
+  echo "pre-commit: lint-staged not found — run 'npm install' first." >&2
+  exit 1
+fi
+
+node_modules/.bin/lint-staged
