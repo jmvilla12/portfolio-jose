@@ -136,7 +136,7 @@
   color: var(--text);
 }
 
-.header__link.is-active::after {
+.header__link::after {
   content: '';
   position: absolute;
   left: var(--space-3);
@@ -145,6 +145,14 @@
   height: 1.5px;
   border-radius: var(--radius-full);
   background: var(--accent);
+  transform-origin: left;
+  scale: 0 1;
+  transition: scale var(--base);
+}
+
+.header__link:hover::after,
+.header__link.is-active::after {
+  scale: 1 1;
 }
 
 .header__actions {

@@ -23,6 +23,7 @@ const Header = () => {
           to={ROUTES.home}
           className="header__brand"
           onClick={() => setMenuOpen(false)}
+          viewTransition
         >
           <span className="header__brand-mark">/</span>
           {APP_CONFIG.name}
@@ -38,6 +39,7 @@ const Header = () => {
               to={item.to}
               end={item.to === ROUTES.home}
               onClick={() => setMenuOpen(false)}
+              viewTransition
               className={({ isActive }) =>
                 `header__link ${isActive ? 'is-active' : ''}`
               }

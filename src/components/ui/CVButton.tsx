@@ -28,7 +28,12 @@ const CVButton = ({
   )
 
   const view = (
-    <Link key="view" to={ROUTES.cv} className={`btn btn--primary ${sizeClass}`}>
+    <Link
+      key="view"
+      to={ROUTES.cv}
+      className={`btn btn--primary ${sizeClass}`}
+      viewTransition
+    >
       View CV
       <FiArrowUpRight className="btn__icon" aria-hidden />
     </Link>

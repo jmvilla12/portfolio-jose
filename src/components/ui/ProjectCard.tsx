@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react'
 import { FiAward, FiGithub } from 'react-icons/fi'
 import type { Project } from '@src/types'
 
@@ -6,9 +7,17 @@ interface ProjectCardProps {
   index: number
 }
 
+/** Feeds the cursor position to the CSS spotlight in `.project::after`. */
+const trackCursor = (event: MouseEvent<HTMLElement>) => {
+  const card = event.currentTarget
+  const rect = card.getBoundingClientRect()
+  card.style.setProperty('--mx', `${event.clientX - rect.left}px`)
+  card.style.setProperty('--my', `${event.clientY - rect.top}px`)
+}
+
 const ProjectCard = ({ project, index }: ProjectCardProps) => {
   return (
-    <article className="card project">
+    <article className="card project" onMouseMove={trackCursor}>
       <div className="card__head">
         <span className="project__index">
           {String(index + 1).padStart(2, '0')}

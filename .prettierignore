@@ -10,3 +10,7 @@ coverage
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
+
+# Agent skills installed by `skills add` (vendored third-party)
+.agents
+.claude
