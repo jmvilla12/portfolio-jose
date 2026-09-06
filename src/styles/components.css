@@ -166,6 +166,7 @@
 .card:hover {
   border-color: var(--border-strong);
   background: var(--surface-hover);
+  transform: translateY(-3px);
 }
 
 .card__head {
@@ -223,6 +224,29 @@
 .project {
   position: relative;
   overflow: hidden;
+}
+
+/* Soft amber spotlight following the cursor. Sits over the content, but at
+   accent-soft alpha it reads as a wash rather than a veil. */
+@media (prefers-reduced-motion: no-preference) {
+  .project::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      16rem circle at var(--mx, 50%) var(--my, 0%),
+      var(--accent-soft),
+      transparent 68%
+    );
+    opacity: 0;
+    transition: opacity var(--base);
+    pointer-events: none;
+  }
+
+  .project:hover::after {
+    opacity: 1;
+  }
 }
 
 .project__index {
@@ -452,4 +476,97 @@
     grid-template-columns: 1fr;
     gap: var(--space-2);
   }
+}
+
+/* --- Reveal on scroll ----------------------------------------------------- */
+
+/* The hidden state lives inside the motion query on purpose: with motion
+   turned off nothing is ever stranded at opacity 0, so the page still reads
+   even if the observer never fires. The entrance drives `translate` rather
+   than `transform`, leaving `transform` free for hover lifts to compose. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal > * {
+    opacity: 0;
+  }
+
+  .reveal.is-visible > * {
+    animation: reveal-in var(--slow) both;
+  }
+
+  /* Stagger the first eight siblings; anything beyond rides the last step so a
+     long list never trails into a visibly late tail. */
+  .reveal.is-visible > *:nth-child(2) {
+    animation-delay: var(--stagger);
+  }
+  .reveal.is-visible > *:nth-child(3) {
+    animation-delay: calc(var(--stagger) * 2);
+  }
+  .reveal.is-visible > *:nth-child(4) {
+    animation-delay: calc(var(--stagger) * 3);
+  }
+  .reveal.is-visible > *:nth-child(5) {
+    animation-delay: calc(var(--stagger) * 4);
+  }
+  .reveal.is-visible > *:nth-child(6) {
+    animation-delay: calc(var(--stagger) * 5);
+  }
+  .reveal.is-visible > *:nth-child(7) {
+    animation-delay: calc(var(--stagger) * 6);
+  }
+  .reveal.is-visible > *:nth-child(n + 8) {
+    animation-delay: calc(var(--stagger) * 7);
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    translate: 0 var(--reveal-y);
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* --- Timeline reveal ------------------------------------------------------ */
+
+/* The amber line is drawn over the neutral border as each item lands, and the
+   dot pops once the item has finished rising. */
+@media (prefers-reduced-motion: no-preference) {
+  .timeline__item::after {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: var(--accent-line);
+    transform-origin: top;
+    scale: 1 0;
+    pointer-events: none;
+  }
+
+  .reveal.is-visible .timeline__item::after {
+    scale: 1 1;
+    transition: scale var(--slow);
+  }
+
+  .reveal .timeline__item::before {
+    scale: 0;
+  }
+
+  .reveal.is-visible .timeline__item::before {
+    scale: 1;
+    transition:
+      scale var(--base) var(--stagger),
+      background-color var(--base);
+  }
+}
+
+/* --- Count-up figures ----------------------------------------------------- */
+
+/* Tabular numerals keep the strip from twitching sideways as digits tick. */
+.countup {
+  font-variant-numeric: tabular-nums;
 }

@@ -13,7 +13,7 @@ const NotFound = () => {
       <p className="section__lead" style={{ marginTop: 0 }}>
         The link may be out of date, or the page may have moved.
       </p>
-      <Link to={ROUTES.home} className="btn btn--ghost">
+      <Link to={ROUTES.home} className="btn btn--ghost" viewTransition>
         <FiArrowLeft className="btn__icon" aria-hidden />
         Back to home
       </Link>

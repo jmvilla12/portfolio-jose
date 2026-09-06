@@ -1,4 +1,4 @@
-import { CVButton, ExperienceItem } from '@components/ui'
+import { CVButton, ExperienceItem, Reveal } from '@components/ui'
 import { APP_CONFIG } from '@constants/index'
 import {
   AWARDS,
@@ -35,11 +35,11 @@ const About = () => {
             <h2>Full history</h2>
           </div>
 
-          <div className="timeline">
+          <Reveal className="timeline">
             {EXPERIENCE.map(experience => (
               <ExperienceItem key={experience.id} experience={experience} />
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -52,7 +52,7 @@ const About = () => {
               <h2>Studies</h2>
             </div>
 
-            <div className="timeline">
+            <Reveal className="timeline">
               {EDUCATION.map(item => (
                 <article key={item.id} className="timeline__item">
                   <div className="timeline__period">
@@ -68,7 +68,7 @@ const About = () => {
                   </div>
                 </article>
               ))}
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -81,7 +81,7 @@ const About = () => {
             <h2>Formal training</h2>
           </div>
 
-          <div className="card-grid">
+          <Reveal className="card-grid">
             {CREDENTIALS.map(item => (
               <article key={item.id} className="card">
                 <div className="card__head">
@@ -98,7 +98,7 @@ const About = () => {
                 </div>
               </article>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 

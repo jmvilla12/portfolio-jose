@@ -45,11 +45,16 @@
   --radius-lg: 1rem;
   --radius-full: 999px;
 
-  /* Motion */
+  /* Motion — --fast/--base/--slow already carry the easing, so use them as
+     `transition: opacity var(--fast)`. Never append var(--ease) after one:
+     two timing functions makes the shorthand invalid and it is dropped. */
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --fast: 140ms var(--ease);
   --base: 240ms var(--ease);
   --slow: 420ms var(--ease);
+  /* Reveal-on-scroll: step between staggered siblings, and how far they rise */
+  --stagger: 70ms;
+  --reveal-y: 1.25rem;
 
   /* --- Dark palette (default) --- */
   --bg: #0a0b0d;

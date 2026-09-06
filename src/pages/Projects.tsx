@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { ProjectCard } from '@components/ui'
+import { ProjectCard, Reveal } from '@components/ui'
 import { PROJECTS } from '@data/index'
 import type { ProjectCategory } from '@src/types'
 
@@ -31,7 +31,7 @@ const Projects = () => {
 
   return (
     <>
-      <header className="container page-head">
+      <Reveal className="container page-head">
         <p className="eyebrow">Projects</p>
         <h1 className="page-head__title">Things I've built</h1>
         <p className="page-head__lead">
@@ -54,15 +54,15 @@ const Projects = () => {
             </button>
           ))}
         </div>
-      </header>
+      </Reveal>
 
       <section className="section">
         <div className="container">
-          <div className="card-grid">
+          <Reveal className="card-grid">
             {visible.map((project, index) => (
               <ProjectCard key={project.id} project={project} index={index} />
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
     </>

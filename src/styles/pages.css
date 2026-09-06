@@ -78,7 +78,14 @@
   margin-top: var(--space-6);
 }
 
-/* Portrait */
+/* Portrait — lands just after the copy column has staggered in. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__portrait {
+    animation: reveal-in var(--slow) both;
+    animation-delay: calc(var(--stagger) * 3);
+  }
+}
+
 .hero__portrait {
   position: relative;
   justify-self: center;

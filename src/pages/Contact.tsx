@@ -1,5 +1,5 @@
 import { FiGithub, FiLinkedin, FiMail, FiMapPin, FiPhone } from 'react-icons/fi'
-import { CVButton } from '@components/ui'
+import { CVButton, Reveal } from '@components/ui'
 import { APP_CONFIG, SOCIAL_LINKS } from '@constants/index'
 
 const CHANNELS = [
@@ -44,7 +44,7 @@ const Contact = () => {
 
       <section className="section section--flush">
         <div className="container">
-          <div className="contact-grid">
+          <Reveal className="contact-grid">
             {CHANNELS.map(({ label, value, href, icon: Icon }) => (
               <a
                 key={label}
@@ -60,7 +60,7 @@ const Contact = () => {
                 <span className="contact-card__value">{value}</span>
               </a>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
