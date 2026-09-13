@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { FiArrowRight } from 'react-icons/fi'
 import {
   CountUp,
@@ -7,11 +6,13 @@ import {
   Reveal,
   SocialLinks,
 } from '@components/ui'
-import { APP_CONFIG, ROUTES, STATS } from '@constants/index'
-import { EXPERIENCE, SKILL_GROUPS } from '@data/index'
+import { LocaleLink, useContent, useI18n } from '@i18n/index'
+import { APP_CONFIG, ROUTES } from '@constants/index'
 
 const Home = () => {
-  const featured = EXPERIENCE.slice(0, 3)
+  const { t } = useI18n()
+  const { experience, skillGroups } = useContent()
+  const featured = experience.slice(0, 3)
 
   return (
     <>
@@ -21,7 +22,7 @@ const Home = () => {
           <Reveal>
             <span className="status">
               <span className="status__dot" aria-hidden />
-              {APP_CONFIG.availability.status}
+              {t.profile.availabilityStatus}
             </span>
 
             <h1 className="hero__name">
@@ -30,31 +31,31 @@ const Home = () => {
             </h1>
 
             <p className="hero__role">
-              {APP_CONFIG.role}
+              {t.profile.role}
               <span className="hero__role-sep" aria-hidden />
-              <span className="hero__role-alt">{APP_CONFIG.roleAlt}</span>
+              <span className="hero__role-alt">{t.profile.roleAlt}</span>
             </p>
 
-            <p className="hero__lead">{APP_CONFIG.tagline}</p>
+            <p className="hero__lead">{t.profile.tagline}</p>
 
             <div className="hero__actions btn-row">
               <CVButton />
-              <Link
+              <LocaleLink
                 to={ROUTES.projects}
                 className="btn btn--quiet"
                 viewTransition
               >
-                See projects
+                {t.actions.seeProjects}
                 <FiArrowRight className="btn__icon" aria-hidden />
-              </Link>
+              </LocaleLink>
             </div>
           </Reveal>
 
           <div className="hero__portrait">
             <img src="/foto_jose.jpg" alt={APP_CONFIG.name} />
             <div className="hero__badge">
-              <strong>Lille</strong>
-              Hauts-de-France
+              <strong>{t.profile.city}</strong>
+              {t.profile.region}
             </div>
           </div>
         </div>
@@ -63,7 +64,7 @@ const Home = () => {
       {/* --- Stats -------------------------------------------------------- */}
       <Reveal className="container">
         <div className="stats">
-          {STATS.map(stat => (
+          {t.stats.map(stat => (
             <div key={stat.label} className="stat">
               <div className="stat__value">
                 <CountUp value={stat.value} />
@@ -79,26 +80,23 @@ const Home = () => {
         <div className="container">
           <Reveal className="split">
             <div className="split__aside">
-              <p className="eyebrow">01 — Experience</p>
-              <h2>Where I've worked</h2>
-              <p className="section__lead">
-                From accounting-data pipelines in a French fintech to CAN bus
-                telemetry on real vehicles.
-              </p>
-              <Link
+              <p className="eyebrow">{t.home.experienceEyebrow}</p>
+              <h2>{t.home.experienceTitle}</h2>
+              <p className="section__lead">{t.home.experienceLead}</p>
+              <LocaleLink
                 to={ROUTES.about}
                 className="btn btn--quiet"
                 style={{ marginTop: '1.5rem' }}
                 viewTransition
               >
-                Full background
+                {t.actions.fullBackground}
                 <FiArrowRight className="btn__icon" aria-hidden />
-              </Link>
+              </LocaleLink>
             </div>
 
             <Reveal className="timeline">
-              {featured.map(experience => (
-                <ExperienceItem key={experience.id} experience={experience} />
+              {featured.map(item => (
+                <ExperienceItem key={item.id} experience={item} />
               ))}
             </Reveal>
           </Reveal>
@@ -109,17 +107,14 @@ const Home = () => {
       <section className="section">
         <div className="container">
           <Reveal className="section__head">
-            <p className="eyebrow">02 — Toolkit</p>
-            <h2>What I build with</h2>
-            <p className="section__lead">
-              A software core with a genuine hardware background underneath —
-              the two reinforce each other rather than compete.
-            </p>
+            <p className="eyebrow">{t.home.skillsEyebrow}</p>
+            <h2>{t.home.skillsTitle}</h2>
+            <p className="section__lead">{t.home.skillsLead}</p>
           </Reveal>
 
           <Reveal className="skills">
-            {SKILL_GROUPS.map(group => (
-              <div key={group.title} className="skill-group">
+            {skillGroups.map(group => (
+              <div key={group.id} className="skill-group">
                 <h3 className="skill-group__title">
                   {group.title}
                   <span className="skill-group__count">
@@ -144,19 +139,19 @@ const Home = () => {
         <div className="container">
           <Reveal className="cta">
             <div>
-              <h2 className="cta__title">Looking for an alternant?</h2>
-              <p className="cta__text">{APP_CONFIG.availability.detail}</p>
+              <h2 className="cta__title">{t.home.ctaTitle}</h2>
+              <p className="cta__text">{t.profile.availabilityDetail}</p>
             </div>
 
             <div className="btn-row">
-              <Link
+              <LocaleLink
                 to={ROUTES.contact}
                 className="btn btn--primary"
                 viewTransition
               >
-                Get in touch
+                {t.actions.getInTouch}
                 <FiArrowRight className="btn__icon" aria-hidden />
-              </Link>
+              </LocaleLink>
               <SocialLinks />
             </div>
           </Reveal>

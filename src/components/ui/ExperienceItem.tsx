@@ -1,3 +1,4 @@
+import { useFormatPeriod } from '@i18n/index'
 import type { Experience } from '@src/types'
 
 interface ExperienceItemProps {
@@ -10,12 +11,14 @@ const ExperienceItem = ({
   experience,
   compact = false,
 }: ExperienceItemProps) => {
+  const formatPeriod = useFormatPeriod()
+
   return (
     <article
       className={`timeline__item ${experience.current ? 'timeline__item--current' : ''}`}
     >
       <div className="timeline__period">
-        {experience.period}
+        {formatPeriod(experience.period)}
         <span className="timeline__place">{experience.location}</span>
       </div>
 

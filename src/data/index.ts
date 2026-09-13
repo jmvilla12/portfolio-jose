@@ -1,30 +1,27 @@
+// Language-independent facts: ids, dates, company names, tech stacks, URLs.
+//
+// The prose that goes with each entry (positions, descriptions, highlights)
+// lives in the dictionaries under `src/i18n/` and is merged in by `useContent`.
+// Nothing in this file should ever need translating — if a string here would
+// read differently in French, it belongs in the dictionaries instead.
+
 import type {
-  Award,
-  Credential,
-  Education,
-  Experience,
-  Language,
-  Project,
-  SkillGroup,
+  AwardBase,
+  CredentialBase,
+  EducationBase,
+  ExperienceBase,
+  ProjectBase,
+  SkillGroupBase,
+  SpokenLanguageId,
 } from '@src/types'
 
 // --- Experience (most recent first) ----------------------------------------
 
-export const EXPERIENCE: Experience[] = [
+export const EXPERIENCE: ExperienceBase[] = [
   {
     id: 'leanpay',
     company: 'LeanPay',
-    position: 'Software Developer — Internship',
-    location: 'Lille, France',
-    period: 'Apr. 2026 — Aug. 2026',
-    description:
-      'B2B SaaS accounts-receivable platform for finance departments. Four-person Integration team, tutored by the CTO, pairing daily with a senior developer.',
-    highlights: [
-      'Integrated 24+ new client configurations into the accounting-data ingestion pipeline — column mapping, date formats, client filters and journal-type rules.',
-      'Designed a two-layer automatic diagnosis system for general-ledger import failures: custom error classes carrying structured failure context, and a classifier routing each failure to a dedicated checker module.',
-      'Built 6 checker modules in strict TDD with Jest (47 tests), producing two distinct outputs per failure — one for the client, one for the developer.',
-      'Argued in code review for subordinating an LLM diagnosis path to the deterministic rules, keeping accounting-data behaviour testable and reproducible.',
-    ],
+    period: { start: '2026-04', end: '2026-08' },
     technologies: [
       'TypeScript',
       'Node.js',
@@ -39,16 +36,7 @@ export const EXPERIENCE: Experience[] = [
   {
     id: 'alta-ai',
     company: 'Alta AI | BlueSkyAI',
-    position: 'Software Developer',
-    location: 'Remote — USA',
-    period: 'Dec. 2024 — Dec. 2025',
-    description:
-      'JRVS, an AI assistant that lets users switch between multiple LLM providers inside a single interface.',
-    highlights: [
-      'Built the entire frontend as the dedicated frontend developer, translating Figma designs into production UI alongside the design team.',
-      'Implemented Firebase Authentication with two independent auth paths — social/email login and X (Twitter) login.',
-      'Built all UI animation with Framer Motion, chosen specifically to keep runtime performance high.',
-    ],
+    period: { start: '2024-12', end: '2025-12' },
     technologies: [
       'React',
       'TypeScript',
@@ -61,31 +49,13 @@ export const EXPERIENCE: Experience[] = [
   {
     id: 'cidt-cinnov',
     company: 'CIDT — Universidad Tecnológica de Pereira · client Cinnov S.A.S.',
-    position: 'Mobile Developer — Contract',
-    location: 'Colombia',
-    period: 'Apr. 2025 — Jul. 2025',
-    description:
-      'Goobi (now Guubi), a live production app mixing a social network with real-time local incident reporting — thefts, accidents, road damage — on a shared map.',
-    highlights: [
-      'Two-person dev team: built the Flutter frontend for two new growth features while a teammate built the NestJS backend.',
-      'Shipped a gamification system to drive new-user adoption and a live map of nearby reported events.',
-      'Used Postman to validate each API contract before wiring endpoints into the UI; work tracked in Azure DevOps.',
-    ],
+    period: { start: '2025-04', end: '2025-07' },
     technologies: ['Flutter', 'Dart', 'REST APIs', 'Postman', 'Azure DevOps'],
   },
   {
     id: 'met-group',
     company: 'MET GROUP SAS',
-    position: 'Engineering Assistant',
-    location: 'Colombia',
-    period: 'Nov. 2021 — May 2022',
-    description:
-      'Vehicle telemetry for an automotive-sector client that needed real-time visibility into its fleet.',
-    highlights: [
-      'Developed a CAN bus interface in MicroPython reading telemetry directly from the vehicle — fuel level, speed, door-open status.',
-      'Built the pipeline uploading that data to the cloud for live monitoring.',
-      'Designed electronic prototypes and PCB layouts in Altium Designer.',
-    ],
+    period: { start: '2021-11', end: '2022-05' },
     technologies: [
       'MicroPython',
       'C',
@@ -98,50 +68,23 @@ export const EXPERIENCE: Experience[] = [
   {
     id: 'mecabot',
     company: 'MECABOT Aeronautics Research Group — UTP',
-    position: 'Research Group Member',
-    location: 'Pereira, Colombia',
-    period: 'Nov. 2019 — Jul. 2023',
-    description:
-      'University research group working across Industry 4.0, aeronautics and robotics competitions.',
-    highlights: [
-      'Competed in Aerodesign and human-powered vehicle (VTH) engineering competitions.',
-      'Built lab automation solutions for the research group.',
-      'Contributed to the VTOL agricultural drone project that became the graduation thesis.',
-    ],
+    period: { start: '2019-11', end: '2023-07' },
     technologies: ['MATLAB', 'C/C++', 'SolidWorks', 'Additive manufacturing'],
   },
 ]
 
 // --- Projects ---------------------------------------------------------------
 
-export const PROJECTS: Project[] = [
+export const PROJECTS: ProjectBase[] = [
   {
     id: 'recycling-map',
-    title: 'Recycling Collection Points',
-    context: 'Challenge Entreprendre — inter-school innovation challenge',
-    period: 'Feb. 2026',
-    description:
-      'A web app mapping every recycling collection point in the city and the material types each centre accepts or provides. Built in a team of five during a one-week challenge — a prototype running on mocked data, not a production service.',
-    highlights: [
-      'Won the "Environment" category — 1 of 4 category winners out of ~40 teams.',
-      'Teams from IMT Nord Europe, Polytech Lille, Université de Lille and IAE Lille.',
-    ],
+    period: { start: '2026-02' },
     technologies: ['TypeScript', 'React', 'Teamwork'],
     category: 'web',
-    award: 'Winner — Environment category',
   },
   {
     id: 'ecommerce-microservices',
-    title: 'E-Commerce Microservices Architecture',
-    context: 'Student project — IMT Nord Europe',
-    period: '2026',
-    description:
-      'A realistic e-commerce backend built as independent services rather than a monolith, with an API gateway in front and a React frontend consuming everything.',
-    highlights: [
-      'Catalogue, Cart and Tracking services, each with its own database and REST API.',
-      'API Gateway built with Spring Cloud Gateway; persistence through Spring Data JPA / Hibernate.',
-      'Built in a team of three, with Maven for build and dependency management.',
-    ],
+    period: { start: '2026' },
     technologies: [
       'Java',
       'Spring Boot',
@@ -155,56 +98,42 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'usv-coverage',
-    title: 'Coverage Path Planning for Autonomous Water Drones',
-    context: 'Research project — IMT Nord Europe',
-    period: '2026',
-    description:
-      'A desktop application that plans an optimal coverage path for an autonomous surface vehicle, so it can fully traverse an arbitrary body of water on a cleaning mission.',
-    highlights: [
-      'Interactive map view built on OpenStreetMap tiles where the user draws the target area vertex by vertex.',
-      'C++ path-planning algorithm computing full-coverage routes over the drawn polygon.',
-      'CMake build with clang-format and clang-tidy enforced on the codebase.',
-    ],
+    period: { start: '2026' },
     technologies: ['C++', 'Qt6 / QML', 'CMake', 'Geospatial', 'OpenStreetMap'],
     category: 'embedded',
   },
   {
     id: 'enso-prediction',
-    title: 'El Niño / La Niña Prediction',
-    context: 'Capstone — Talento Tech Data Analysis bootcamp',
-    period: 'Nov. — Dec. 2024',
-    description:
-      'A team project modelling the duration and intensity of El Niño and La Niña cycles in Colombia from open climate data, built as exploratory analysis plus a linear regression model.',
-    highlights: [
-      'Real meteorological data from IDEAM — Matecaña Airport station: precipitation, solar radiation and dry-bulb temperature.',
-      'Exploratory analysis and visualisation with pandas, numpy, matplotlib and seaborn.',
-    ],
+    period: { start: '2024-11', end: '2024-12' },
     technologies: ['Python', 'scikit-learn', 'pandas', 'numpy', 'seaborn'],
     category: 'data',
   },
   {
     id: 'vtol-drone',
-    title: 'VTOL Agricultural Drone',
-    context: 'Graduation thesis — Universidad Tecnológica de Pereira',
-    period: '2023',
-    description:
-      'Design and implementation of an unmanned aerial vehicle with a vertical take-off and landing system for the agricultural sector, with an airframe produced using additive manufacturing technologies.',
+    period: { start: '2023' },
     technologies: [
-      'C/C++',
-      'MATLAB',
+      'Autodesk Inventor',
       'SolidWorks',
-      'Additive manufacturing',
+      'ANSYS (CFD)',
+      'Pixhawk 2.4.8',
+      'FDM 3D printing',
       'Control systems',
     ],
     category: 'embedded',
+    publicationUrl:
+      'https://repositorio.utp.edu.co/entities/publication/db6257f3-2388-45c5-9dc9-9cbf145f4136',
+  },
+  {
+    id: 'image-ocr',
+    // TODO(jose): confirm the year — the background file records the grade
+    // (4.5) but not when the elective was taken. Engineering cycle, so 2021-23.
+    period: { start: '2022' },
+    technologies: ['MATLAB', 'OpenCV', 'Image processing', 'OCR'],
+    category: 'data',
   },
   {
     id: 'portfolio',
-    title: 'This Portfolio',
-    context: 'Personal project',
-    period: '2026',
-    description:
-      'A hand-built portfolio with no UI framework — a small design-token system, React Router for navigation and a light/dark theme that follows the system preference until you override it.',
+    period: { start: '2026' },
     technologies: ['React', 'TypeScript', 'Vite', 'CSS', 'React Router'],
     category: 'web',
     githubUrl: 'https://github.com/jmvilla12/portfolio-jose',
@@ -213,113 +142,52 @@ export const PROJECTS: Project[] = [
 
 // --- Education --------------------------------------------------------------
 
-export const EDUCATION: Education[] = [
+export const EDUCATION: EducationBase[] = [
   {
     id: 'imt',
     institution: 'IMT Nord Europe',
-    degree:
-      "Master's in Engineering — Intelligent, Secure and Communicating Systems (SISC)",
-    location: 'Lille, France',
-    period: 'Sept. 2025 — present',
-    detail:
-      'Artificial intelligence, cybersecurity, cloud computing, embedded systems and advanced network architectures. RNCP 41148, EQF Level 7.',
+    period: { start: '2025-09', ongoing: true },
   },
   {
     id: 'utp',
     institution: 'Universidad Tecnológica de Pereira',
-    degree: 'Mechatronics Engineering',
-    location: 'Pereira, Colombia',
-    period: 'Jan. 2018 — Jul. 2023',
-    detail:
-      'GPA 4.3/5.0, no failed courses. Thesis on a VTOL agricultural drone built with additive manufacturing.',
+    period: { start: '2018-01', end: '2023-07' },
   },
   {
     id: 'its',
     institution: 'Instituto Técnico Superior de Pereira',
-    degree: 'Technical Baccalaureate in Autotronics (Automotive Mechatronics)',
-    location: 'Pereira, Colombia',
-    period: '2017',
-    detail:
-      'Automotive mechanics and vehicle electronics — the earliest layer of the hardware side of the profile.',
+    period: { start: '2017' },
   },
 ]
 
 // --- Certifications ---------------------------------------------------------
 
-export const CREDENTIALS: Credential[] = [
-  {
-    id: 'stormshield',
-    title: 'Stormshield Network Administrator (CSNA)',
-    issuer: 'Stormshield',
-    year: 'Valid to 2029',
-    detail:
-      'Scored 86%. Strongest areas: address translation (98%), firewall management (95%), network configuration (93%).',
-  },
-  {
-    id: 'talento-tech',
-    title: 'Data Analysis Bootcamp',
-    issuer: 'Talento Tech, Colombia',
-    year: '2024',
-  },
-  {
-    id: 'fullstack-utp',
-    title: 'Junior Full Stack Developer — 176h',
-    issuer: 'Universidad Tecnológica de Pereira',
-    year: '2024',
-  },
-  {
-    id: 'python-michigan',
-    title: 'Python for Everybody Specialization — 76h',
-    issuer: 'University of Michigan · Coursera',
-    year: '2021',
-  },
+export const CREDENTIALS: CredentialBase[] = [
+  { id: 'stormshield' },
+  { id: 'talento-tech' },
+  { id: 'fullstack-utp' },
+  { id: 'python-michigan' },
 ]
 
 // --- Awards -----------------------------------------------------------------
 
-export const AWARDS: Award[] = [
-  {
-    id: 'challenge-entreprendre',
-    title: 'Winner — Challenge Entreprendre, Environment category',
-    year: '2026',
-    detail:
-      'One-week inter-school innovation challenge, ~40 teams from IMT Nord Europe, Polytech Lille, Université de Lille and IAE Lille. One of four category winners.',
-  },
-  {
-    id: 'colfuturo',
-    title: 'Talent Seedbed Program (Pépinière de Talents)',
-    year: '2024',
-    detail:
-      'Selective COLFUTURO program supporting academically excellent students pursuing study abroad.',
-  },
-  {
-    id: 'distinguished',
-    title: 'Distinguished Student in Mechatronics Engineering',
-    year: '2023',
-    detail:
-      'Awarded for a 4.3/5.0 graduation GPA with no failed courses across the whole program.',
-  },
-  {
-    id: 'cooeducar',
-    title: '"Cooeducar Supporting Higher Education" Scholarship',
-    year: '2018 — 2023',
-    detail: 'Awarded on academic merit and financial need.',
-  },
+export const AWARDS: AwardBase[] = [
+  { id: 'challenge-entreprendre', period: { start: '2026' } },
+  { id: 'colfuturo', period: { start: '2024' } },
+  { id: 'distinguished', period: { start: '2023' } },
+  { id: 'cooeducar', period: { start: '2018', end: '2023' } },
 ]
 
-// --- Languages --------------------------------------------------------------
+// --- Spoken languages -------------------------------------------------------
 
-export const LANGUAGES: Language[] = [
-  { name: 'Spanish', level: 'Native' },
-  { name: 'English', level: 'C1 — Advanced' },
-  { name: 'French', level: 'C1 — Advanced' },
-]
+/** Display order; the names and levels themselves are translated. */
+export const SPOKEN_LANGUAGES: SpokenLanguageId[] = ['es', 'en', 'fr']
 
 // --- Skills -----------------------------------------------------------------
 
-export const SKILL_GROUPS: SkillGroup[] = [
+export const SKILL_GROUPS: SkillGroupBase[] = [
   {
-    title: 'Frontend',
+    id: 'frontend',
     skills: [
       'TypeScript',
       'JavaScript',
@@ -334,7 +202,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
     ],
   },
   {
-    title: 'Backend & Data',
+    id: 'backend-data',
     skills: [
       'Node.js',
       'NestJS',
@@ -351,7 +219,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
     ],
   },
   {
-    title: 'Testing & Practices',
+    id: 'testing',
     skills: [
       'TDD',
       'Jest',
@@ -364,7 +232,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
     ],
   },
   {
-    title: 'Security & Networks',
+    id: 'security',
     skills: [
       'Stormshield CSNA',
       'Firewall management',
@@ -375,7 +243,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
     ],
   },
   {
-    title: 'Embedded & Systems',
+    id: 'embedded',
     skills: [
       'C',
       'C++',
@@ -385,19 +253,37 @@ export const SKILL_GROUPS: SkillGroup[] = [
       'CMake',
       'MATLAB',
       'Simulink',
-      'Altium Designer',
+      'LabVIEW',
+      'PID control',
+      'Pixhawk',
+      'Microcontrollers',
     ],
   },
   {
-    title: 'Data & Analysis',
+    id: 'cad-simulation',
+    skills: [
+      'SolidWorks',
+      'Autodesk Inventor',
+      'Fusion 360',
+      'AutoCAD',
+      'ANSYS (CFD)',
+      'FEA',
+      'Generative design',
+      'Altium Designer',
+      'FDM 3D printing',
+    ],
+  },
+  {
+    id: 'data',
     skills: [
       'pandas',
       'numpy',
       'scikit-learn',
       'seaborn',
+      'OpenCV',
       'Power BI',
       'R',
-      'Excel',
+      'SQL',
     ],
   },
 ]

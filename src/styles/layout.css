@@ -184,6 +184,114 @@
   background: var(--accent-soft);
 }
 
+/* Language switcher. A menu rather than a row of buttons: the header keeps
+   the same width however many languages the site grows to. */
+.lang {
+  position: relative;
+}
+
+.lang__toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 2.25rem;
+  padding-inline: var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  transition:
+    color var(--fast),
+    border-color var(--fast),
+    background-color var(--fast);
+}
+
+.lang__toggle:hover,
+.lang__toggle[aria-expanded='true'] {
+  color: var(--accent);
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+}
+
+.lang__code {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.04em;
+}
+
+.lang__caret {
+  width: 0.875rem;
+  height: 0.875rem;
+  transition: rotate var(--fast);
+}
+
+.lang__toggle[aria-expanded='true'] .lang__caret {
+  rotate: 180deg;
+}
+
+.flag {
+  width: 1.125rem;
+  height: 0.75rem;
+  flex: none;
+  border-radius: 2px;
+  /* The Spanish and French flags carry white or light bands that vanish on a
+     pale background — the hairline keeps every flag readable in both themes. */
+  box-shadow: 0 0 0 1px var(--border-strong);
+}
+
+.lang__menu {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  min-width: 10rem;
+  padding: var(--space-1);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 28px -12px rgb(0 0 0 / 0.45);
+}
+
+.lang__option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--fast),
+    background-color var(--fast);
+}
+
+.lang__option:hover {
+  color: var(--text);
+  background: var(--surface-hover);
+}
+
+.lang__option.is-active {
+  color: var(--accent);
+}
+
+.lang__name {
+  font-size: var(--text-sm);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lang__menu {
+    animation: lang-in var(--fast) both;
+  }
+
+  @keyframes lang-in {
+    from {
+      opacity: 0;
+      translate: 0 -4px;
+    }
+  }
+}
+
 /* Mobile nav toggle */
 .header__burger {
   display: none;
@@ -231,6 +339,14 @@
 
   .header__burger {
     display: grid;
+  }
+
+  .header__actions {
+    padding-left: var(--space-2);
+  }
+
+  .lang__toggle {
+    padding-inline: var(--space-1);
   }
 }
 

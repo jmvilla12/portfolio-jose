@@ -1,9 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import { FiArrowLeft, FiDownload, FiExternalLink } from 'react-icons/fi'
-import { CV_CONFIG } from '@constants/index'
+import { useI18n } from '@i18n/index'
+import { resolveCV } from '@constants/index'
 
 const CVPage = () => {
   const navigate = useNavigate()
+  const { locale, t } = useI18n()
+  const cv = resolveCV(locale)
 
   return (
     <div className="container cv">
@@ -14,28 +17,28 @@ const CVPage = () => {
           type="button"
         >
           <FiArrowLeft className="btn__icon" aria-hidden />
-          Back
+          {t.actions.back}
         </button>
 
-        <h1 className="cv__title">Curriculum Vitae</h1>
+        <h1 className="cv__title">{t.cv.title}</h1>
 
         <div className="btn-row">
           <a
-            href={CV_CONFIG.path}
+            href={cv.path}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn--ghost btn--sm"
           >
             <FiExternalLink className="btn__icon" aria-hidden />
-            Open in new tab
+            {t.actions.openInNewTab}
           </a>
           <a
-            href={CV_CONFIG.path}
-            download={CV_CONFIG.downloadName}
+            href={cv.path}
+            download={cv.downloadName}
             className="btn btn--primary btn--sm"
           >
             <FiDownload className="btn__icon" aria-hidden />
-            Download PDF
+            {t.actions.downloadPDF}
           </a>
         </div>
       </div>
@@ -44,39 +47,40 @@ const CVPage = () => {
         {/* `object` renders the browser's PDF viewer and falls back to its
             children when the browser can't — which is most mobile browsers. */}
         <object
-          data={CV_CONFIG.path}
+          data={cv.path}
           type="application/pdf"
-          aria-label="Curriculum Vitae"
+          aria-label={t.cv.frameLabel}
         >
           <div className="cv__fallback">
-            <p>
-              Your browser can't display PDFs inline. Open the CV in a new tab
-              or download it instead.
-            </p>
+            <p>{t.cv.fallback}</p>
             <div className="btn-row">
               <a
-                href={CV_CONFIG.path}
+                href={cv.path}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn--ghost"
               >
                 <FiExternalLink className="btn__icon" aria-hidden />
-                Open
+                {t.actions.open}
               </a>
               <a
-                href={CV_CONFIG.path}
-                download={CV_CONFIG.downloadName}
+                href={cv.path}
+                download={cv.downloadName}
                 className="btn btn--primary"
               >
                 <FiDownload className="btn__icon" aria-hidden />
-                Download
+                {t.actions.download}
               </a>
             </div>
           </div>
         </object>
       </div>
 
-      <p className="cv__lang">Document language: French</p>
+      {/* Names the language of the PDF actually served, which is not always the
+          language of the page — see `resolveCV`. */}
+      <p className="cv__lang">
+        {t.cv.documentLanguage}: {t.spokenLanguages[cv.documentLocale].name}
+      </p>
     </div>
   )
 }
