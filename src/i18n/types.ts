@@ -1,7 +1,7 @@
 // Locale primitives. Kept in their own module so `data`, `constants` and the
 // dictionaries can all depend on it without importing the React context.
 
-export const LOCALES = ['en', 'fr'] as const
+export const LOCALES = ['en', 'fr', 'es'] as const
 
 export type Locale = (typeof LOCALES)[number]
 
@@ -14,6 +14,7 @@ export const LOCALE_STORAGE_KEY = 'locale'
 export const LOCALE_NAMES: Record<Locale, string> = {
   en: 'English',
   fr: 'Français',
+  es: 'Español',
 }
 
 /** ISO country whose flag stands for each language in the switcher. */
@@ -22,6 +23,7 @@ export type CountryCode = 'GB' | 'ES' | 'FR'
 export const LOCALE_COUNTRY: Record<Locale, CountryCode> = {
   en: 'GB',
   fr: 'FR',
+  es: 'ES',
 }
 
 export const isLocale = (value: unknown): value is Locale =>

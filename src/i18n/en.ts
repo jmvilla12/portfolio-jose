@@ -423,7 +423,7 @@ export const en = {
 
 /**
  * The shape every locale must satisfy. Because it is derived from `en`, adding
- * a key here without translating it in `fr.ts` is a compile error, not a silent
- * fallback to English.
+ * a key here without translating it in `fr.ts` and `es.ts` is a compile error,
+ * not a silent fallback to English.
  */
 export type Dictionary = typeof en

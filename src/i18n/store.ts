@@ -24,11 +24,12 @@ import type {
 } from '@src/types'
 import { en } from './en'
 import type { Dictionary } from './en'
+import { es } from './es'
 import { fr } from './fr'
 import type { Locale } from './types'
 import { DEFAULT_LOCALE, isLocale, LOCALE_STORAGE_KEY } from './types'
 
-export const DICTIONARIES: Record<Locale, Dictionary> = { en, fr }
+export const DICTIONARIES: Record<Locale, Dictionary> = { en, fr, es }
 
 export interface I18nValue {
   locale: Locale
