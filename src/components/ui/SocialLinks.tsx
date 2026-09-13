@@ -1,4 +1,5 @@
 import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
+import { useI18n } from '@i18n/index'
 import { SOCIAL_LINKS } from '@constants/index'
 
 interface SocialLinksProps {
@@ -13,13 +14,17 @@ const SocialLinks = ({
   showEmail = false,
   className = '',
 }: SocialLinksProps) => {
+  const { t } = useI18n()
+
+  // GitHub and LinkedIn are product names and stay as they are in every
+  // language; only "Email" has a translation.
   const links = [
     { label: 'GitHub', href: SOCIAL_LINKS.github, icon: FiGithub },
     { label: 'LinkedIn', href: SOCIAL_LINKS.linkedin, icon: FiLinkedin },
     ...(showEmail
       ? [
           {
-            label: 'Email',
+            label: t.contact.emailLabel,
             href: `mailto:${SOCIAL_LINKS.email}`,
             icon: FiMail,
           },

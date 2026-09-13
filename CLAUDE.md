@@ -30,16 +30,19 @@ Node is managed by nvm4w (`C:\nvm4w\nodejs` is a symlink to the active version u
 
 ### Content lives in data modules, not in JSX
 
-Every piece of portfolio content is a typed constant. Pages read from these and render; they contain no hardcoded copy worth editing.
+No page contains hardcoded copy. Content is split by whether it would read differently in another language:
 
-- `src/constants/index.ts` — `APP_CONFIG` (name, role, tagline, availability), `SOCIAL_LINKS`, `ROUTES`, `NAV_ITEMS`, `CV_CONFIG`, `STATS`. All `as const`.
-- `src/data/index.ts` — `EXPERIENCE`, `PROJECTS`, `EDUCATION`, `CREDENTIALS`, `AWARDS`, `LANGUAGES`, `SKILL_GROUPS`, each typed against `src/types/index.ts`.
+- `src/constants/index.ts` — language-independent config: `APP_CONFIG` (name only), `SOCIAL_LINKS`, `ROUTES`, `NAV_ITEMS`, `resolveCV`.
+- `src/data/index.ts` — language-independent facts: ids, `Period` dates, company and institution names, tech stacks, URLs. Typed against the `*Base` interfaces in `src/types/index.ts`.
+- `src/i18n/en.ts` and `src/i18n/fr.ts` — every string a reader sees, including all prose from the data entries (`position`, `description`, `highlights`, `title`, …).
 
-To change what the site says, edit these files. To change how it looks, edit the page/component and CSS. `STATS` is denormalised from the data files — its comment says to keep it in sync by hand.
+`useContent()` merges the two halves by id and hands pages ready-made `Experience[]`, `Project[]` and friends. To change what the site says, edit the dictionaries; to change a date, a tech stack or a URL, edit `src/data/index.ts`.
 
 ### Adding a route
 
-Four coordinated edits: add the path to `ROUTES` (and `NAV_ITEMS` if it belongs in the nav) in `src/constants/index.ts`, create the page in `src/pages/`, re-export it from `src/pages/index.ts`, add a `<Route>` in `src/App.tsx`. `App.tsx` wraps everything in `Layout` (header + `<main>` + footer) and calls `useScrollToTop()`; the catch-all `*` route renders `NotFound`.
+Five coordinated edits: add the path to `ROUTES` in `src/constants/index.ts` (and to `NAV_ITEMS` if it belongs in the nav, whose `key` must exist under `nav` in every dictionary), create the page in `src/pages/`, re-export it from `src/pages/index.ts`, add a `<Route>` inside `LocalisedApp` in `src/App.tsx`.
+
+Routes nest under `/:locale`, so paths in `App.tsx` are written **relative** (`path="about"`, not `path="/about"`). `LocalisedApp` wraps everything in `I18nProvider` + `Layout` (header + `<main>` + footer) and calls `useScrollToTop()`; the catch-all `*` route renders `NotFound`.
 
 `public/_redirects` (`/* /index.html 200`) is what makes `BrowserRouter` deep links work on Netlify-style hosts — keep it when changing hosting.
 
@@ -51,11 +54,31 @@ Every folder has an `index.ts`. Components are default-exported from their file 
 import { Layout } from '@components/layout'
 import { CVButton } from '@components/ui'
 import { useTheme } from '@hooks/index'
+import { LocaleLink, useContent, useI18n } from '@i18n/index'
 import { EXPERIENCE } from '@data/index'
 import type { Project } from '@src/types'
 ```
 
-Aliases (`@/`, `@src`, `@assets`, `@components`, `@pages`, `@hooks`, `@utils`, `@styles`, `@data`, `@constants`) are declared **twice** — `compilerOptions.paths` in `tsconfig.app.json` for the type checker and `resolve.alias` in `vite.config.ts` for the bundler. A new alias must be added to both or the build breaks in one of the two.
+Aliases (`@/`, `@src`, `@assets`, `@components`, `@pages`, `@hooks`, `@i18n`, `@utils`, `@styles`, `@data`, `@constants`) are declared **twice** — `compilerOptions.paths` in `tsconfig.app.json` for the type checker and `resolve.alias` in `vite.config.ts` for the bundler. A new alias must be added to both or the build breaks in one of the two.
+
+### Internationalisation
+
+English is the default; French is complete. No i18n library — the content has no plurals or interpolation, so a typed dictionary buys a stronger guarantee for 0 KB.
+
+`src/i18n/en.ts` is the source of truth for the **shape**: `type Dictionary = typeof en`, and `fr.ts` declares `export const fr: Dictionary`. A missing or misspelled key is a `tsc -b` error, never a silent fallback to English. `en.ts` therefore must **not** use `as const` — the values have to widen to `string` or no translation could differ from the English literal.
+
+- **URLs carry the locale**: `/en/projects`, `/fr/projects`. `/` redirects to the detected locale and any un-prefixed path (`/about`) is redirected rather than 404'd, so old links keep working.
+- **Precedence**: URL > `localStorage` > `navigator.languages` > `en`. A shared `/fr/...` link stays French whatever the visitor's browser asks for.
+- **Never use bare `<Link>`/`<NavLink>`** — use `LocaleLink`/`LocaleNavLink` from `@i18n/index`, or a French reader lands back in English.
+- `I18nProvider` mirrors the locale onto `<html lang>` and emits the `hreflang` alternates (React 19 hoists them to `<head>` — no helmet library).
+- **Dates are never translated by hand.** They are stored as ISO fragments (`{ start: '2026-04', end: '2026-08' }`) and rendered by `formatPeriod` via `Intl`: "April — August 2026", "avril — août 2026". Use `useFormatPeriod()`.
+- **Not translated**: company and institution names, tech stacks, GitHub/LinkedIn.
+
+Adding a locale: add it to `LOCALES`, `LOCALE_NAMES` and `LOCALE_COUNTRY` in `src/i18n/types.ts`, copy `fr.ts`, register it in `DICTIONARIES` in `store.ts`, and add its CV to `CV_FILES`. The type error list is the translation checklist.
+
+The switcher (`LanguageSwitcher`) is a menu, not a row of buttons, so the header keeps its width as locales are added. Flags are inline SVG in `Flag.tsx` rather than a package: `react-country-flag` either fetches each SVG from a third-party CDN at render time or falls back to flag emoji, which Windows does not render.
+
+**CV PDFs** live in `public/`, one per language, named `Jose_Villa_CV_<LOCALE>.pdf`. `resolveCV` in `src/constants/index.ts` maps only the files that actually exist and falls back to English otherwise — the CV page then labels the document with the language it really served. Adding a translation is one line in `CV_FILES`.
 
 ### Styling: global CSS, tokens, BEM-ish classes
 

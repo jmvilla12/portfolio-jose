@@ -1,27 +1,18 @@
 import { CVButton, ExperienceItem, Reveal } from '@components/ui'
-import { APP_CONFIG } from '@constants/index'
-import {
-  AWARDS,
-  CREDENTIALS,
-  EDUCATION,
-  EXPERIENCE,
-  LANGUAGES,
-} from '@data/index'
+import { useContent, useFormatPeriod, useI18n } from '@i18n/index'
 
 const About = () => {
+  const { t } = useI18n()
+  const { awards, credentials, education, experience, spokenLanguages } =
+    useContent()
+  const formatPeriod = useFormatPeriod()
+
   return (
     <>
       <header className="container page-head">
-        <p className="eyebrow">About</p>
-        <h1 className="page-head__title">
-          Software engineer with a mechatronics past
-        </h1>
-        <p className="page-head__lead">
-          I started in mechatronics in Colombia — engines, PCBs, CAN buses — and
-          moved into software without leaving the hardware behind. Today I'm
-          finishing an M2 in intelligent, secure and communicating systems at
-          IMT Nord Europe, in Lille.
-        </p>
+        <p className="eyebrow">{t.about.eyebrow}</p>
+        <h1 className="page-head__title">{t.about.title}</h1>
+        <p className="page-head__lead">{t.about.lead}</p>
         <div style={{ marginTop: '2rem' }}>
           <CVButton />
         </div>
@@ -31,13 +22,13 @@ const About = () => {
       <section className="section">
         <div className="container">
           <div className="section__head">
-            <p className="eyebrow">01 — Experience</p>
-            <h2>Full history</h2>
+            <p className="eyebrow">{t.about.experienceEyebrow}</p>
+            <h2>{t.about.experienceTitle}</h2>
           </div>
 
           <Reveal className="timeline">
-            {EXPERIENCE.map(experience => (
-              <ExperienceItem key={experience.id} experience={experience} />
+            {experience.map(item => (
+              <ExperienceItem key={item.id} experience={item} />
             ))}
           </Reveal>
         </div>
@@ -48,15 +39,15 @@ const About = () => {
         <div className="container">
           <div className="split">
             <div className="split__aside">
-              <p className="eyebrow">02 — Education</p>
-              <h2>Studies</h2>
+              <p className="eyebrow">{t.about.educationEyebrow}</p>
+              <h2>{t.about.educationTitle}</h2>
             </div>
 
             <Reveal className="timeline">
-              {EDUCATION.map(item => (
+              {education.map(item => (
                 <article key={item.id} className="timeline__item">
                   <div className="timeline__period">
-                    {item.period}
+                    {formatPeriod(item.period)}
                     <span className="timeline__place">{item.location}</span>
                   </div>
                   <div>
@@ -77,12 +68,12 @@ const About = () => {
       <section className="section">
         <div className="container">
           <div className="section__head">
-            <p className="eyebrow">03 — Certifications</p>
-            <h2>Formal training</h2>
+            <p className="eyebrow">{t.about.credentialsEyebrow}</p>
+            <h2>{t.about.credentialsTitle}</h2>
           </div>
 
           <Reveal className="card-grid">
-            {CREDENTIALS.map(item => (
+            {credentials.map(item => (
               <article key={item.id} className="card">
                 <div className="card__head">
                   <h3 className="card__title card__title--sm">{item.title}</h3>
@@ -107,14 +98,14 @@ const About = () => {
         <div className="container">
           <div className="split">
             <div className="split__aside">
-              <p className="eyebrow">04 — Recognition</p>
-              <h2>Awards</h2>
+              <p className="eyebrow">{t.about.awardsEyebrow}</p>
+              <h2>{t.about.awardsTitle}</h2>
             </div>
 
             <div className="rows">
-              {AWARDS.map(award => (
+              {awards.map(award => (
                 <div key={award.id} className="row">
-                  <div className="row__key">{award.year}</div>
+                  <div className="row__key">{formatPeriod(award.period)}</div>
                   <div className="row__value">
                     <strong>{award.title}</strong>
                     {award.detail}
@@ -130,25 +121,43 @@ const About = () => {
         <div className="container">
           <div className="split">
             <div className="split__aside">
-              <p className="eyebrow">05 — Languages</p>
-              <h2>Spoken</h2>
-              <p className="section__lead">
-                Working daily in French and English, thinking in Spanish.
-              </p>
+              <p className="eyebrow">{t.about.talksEyebrow}</p>
+              <h2>{t.about.talksTitle}</h2>
             </div>
 
             <div className="rows">
-              {LANGUAGES.map(language => (
-                <div key={language.name} className="row">
+              <div className="row">
+                <div className="row__key">2023</div>
+                <div className="row__value">{t.about.talkSpeaker}</div>
+              </div>
+              <div className="row">
+                <div className="row__key">2022</div>
+                <div className="row__value">{t.about.talkJudge}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="split">
+            <div className="split__aside">
+              <p className="eyebrow">{t.about.languagesEyebrow}</p>
+              <h2>{t.about.languagesTitle}</h2>
+              <p className="section__lead">{t.about.languagesLead}</p>
+            </div>
+
+            <div className="rows">
+              {spokenLanguages.map(language => (
+                <div key={language.id} className="row">
                   <div className="row__key">{language.name}</div>
                   <div className="row__value">{language.level}</div>
                 </div>
               ))}
               <div className="row">
-                <div className="row__key">Also</div>
-                <div className="row__value">
-                  Portuguese, Italian and German at a beginner level (A1–A2).
-                </div>
+                <div className="row__key">{t.about.languagesAlsoKey}</div>
+                <div className="row__value">{t.about.languagesAlsoValue}</div>
               </div>
             </div>
           </div>
@@ -160,37 +169,32 @@ const About = () => {
         <div className="container">
           <div className="split">
             <div className="split__aside">
-              <p className="eyebrow">06 — Outside work</p>
-              <h2>The rest</h2>
+              <p className="eyebrow">{t.about.outsideEyebrow}</p>
+              <h2>{t.about.outsideTitle}</h2>
             </div>
 
             <div className="rows">
               <div className="row">
-                <div className="row__key">Volunteering</div>
+                <div className="row__key">{t.about.volunteeringKey}</div>
                 <div className="row__value">
-                  <strong>AeroKiddo (2021, 2024)</strong>
-                  Teaching aeronautics to children aged 7–12 through the STEAM
-                  methodology, with the UTP aeronautics research group.
+                  <strong>{t.about.volunteeringTitle}</strong>
+                  {t.about.volunteeringValue}
                 </div>
               </div>
               <div className="row">
-                <div className="row__key">Community</div>
+                <div className="row__key">{t.about.communityKey}</div>
                 <div className="row__value">
-                  <strong>Garde Romaine (2016–2024)</strong>A social project run
-                  by students and graduates of the Instituto Técnico Superior in
-                  Pereira.
+                  <strong>{t.about.communityTitle}</strong>
+                  {t.about.communityValue}
                 </div>
               </div>
               <div className="row">
-                <div className="row__key">Off-screen</div>
-                <div className="row__value">
-                  Strength training, football, handball, cooking, partner
-                  dancing and picking up new languages.
-                </div>
+                <div className="row__key">{t.about.offScreenKey}</div>
+                <div className="row__value">{t.about.offScreenValue}</div>
               </div>
               <div className="row">
-                <div className="row__key">Based in</div>
-                <div className="row__value">{APP_CONFIG.location}</div>
+                <div className="row__key">{t.about.basedInKey}</div>
+                <div className="row__value">{t.profile.location}</div>
               </div>
             </div>
           </div>

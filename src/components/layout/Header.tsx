@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
 import { FiMenu, FiMoon, FiSun, FiX } from 'react-icons/fi'
+import { LanguageSwitcher } from '@components/ui'
 import { useTheme } from '@hooks/index'
+import { LocaleLink, LocaleNavLink, useI18n } from '@i18n/index'
 import { APP_CONFIG, NAV_ITEMS, ROUTES } from '@constants/index'
 
 const Header = () => {
   const { theme, toggleTheme } = useTheme()
+  const { t } = useI18n()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -19,7 +21,7 @@ const Header = () => {
   return (
     <header className={`header ${scrolled ? 'header--scrolled' : ''}`}>
       <div className="container header__inner">
-        <Link
+        <LocaleLink
           to={ROUTES.home}
           className="header__brand"
           onClick={() => setMenuOpen(false)}
@@ -27,14 +29,14 @@ const Header = () => {
         >
           <span className="header__brand-mark">/</span>
           {APP_CONFIG.name}
-        </Link>
+        </LocaleLink>
 
         <nav
           id="primary-nav"
           className={`header__nav ${menuOpen ? 'is-open' : ''}`}
         >
           {NAV_ITEMS.map(item => (
-            <NavLink
+            <LocaleNavLink
               key={item.to}
               to={item.to}
               end={item.to === ROUTES.home}
@@ -44,17 +46,21 @@ const Header = () => {
                 `header__link ${isActive ? 'is-active' : ''}`
               }
             >
-              {item.label}
-            </NavLink>
+              {t.nav[item.key]}
+            </LocaleNavLink>
           ))}
         </nav>
 
         <div className="header__actions">
+          <LanguageSwitcher />
+
           <button
             onClick={toggleTheme}
             className="icon-button"
             type="button"
-            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+            aria-label={
+              theme === 'dark' ? t.header.switchToLight : t.header.switchToDark
+            }
           >
             {theme === 'dark' ? <FiSun /> : <FiMoon />}
           </button>
@@ -63,7 +69,7 @@ const Header = () => {
             onClick={() => setMenuOpen(open => !open)}
             className="icon-button header__burger"
             type="button"
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={menuOpen ? t.header.closeMenu : t.header.openMenu}
             aria-expanded={menuOpen}
             aria-controls="primary-nav"
           >

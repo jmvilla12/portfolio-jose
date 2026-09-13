@@ -1,56 +1,58 @@
 import { useMemo, useState } from 'react'
 import { ProjectCard, Reveal } from '@components/ui'
-import { PROJECTS } from '@data/index'
+import { useContent, useI18n } from '@i18n/index'
 import type { ProjectCategory } from '@src/types'
 
-const FILTERS: { label: string; value: ProjectCategory | 'all' }[] = [
-  { label: 'All', value: 'all' },
-  { label: 'Web', value: 'web' },
-  { label: 'Backend', value: 'backend' },
-  { label: 'Embedded', value: 'embedded' },
-  { label: 'Data', value: 'data' },
+type Filter = ProjectCategory | 'all'
+
+/** Display order; the labels come from `t.projectsPage.filters`. */
+const FILTER_ORDER: Filter[] = [
+  'all',
+  'web',
+  'backend',
+  'embedded',
+  'data',
+  'mobile',
 ]
 
 const Projects = () => {
-  const [filter, setFilter] = useState<ProjectCategory | 'all'>('all')
+  const { t } = useI18n()
+  const { projects } = useContent()
+  const [filter, setFilter] = useState<Filter>('all')
 
   const visible = useMemo(
     () =>
       filter === 'all'
-        ? PROJECTS
-        : PROJECTS.filter(project => project.category === filter),
-    [filter]
+        ? projects
+        : projects.filter(project => project.category === filter),
+    [filter, projects]
   )
 
   // Hide filters that would produce an empty list.
-  const available = FILTERS.filter(
+  const available = FILTER_ORDER.filter(
     option =>
-      option.value === 'all' ||
-      PROJECTS.some(project => project.category === option.value)
+      option === 'all' || projects.some(project => project.category === option)
   )
 
   return (
     <>
       <Reveal className="container page-head">
-        <p className="eyebrow">Projects</p>
-        <h1 className="page-head__title">Things I've built</h1>
-        <p className="page-head__lead">
-          Academic, competition and personal work. Each one says plainly what it
-          actually is — a prototype stays a prototype.
-        </p>
+        <p className="eyebrow">{t.projectsPage.eyebrow}</p>
+        <h1 className="page-head__title">{t.projectsPage.title}</h1>
+        <p className="page-head__lead">{t.projectsPage.lead}</p>
 
         <div className="btn-row" style={{ marginTop: '2rem' }}>
           {available.map(option => (
             <button
-              key={option.value}
+              key={option}
               type="button"
-              onClick={() => setFilter(option.value)}
+              onClick={() => setFilter(option)}
               className={`btn btn--sm ${
-                filter === option.value ? 'btn--primary' : 'btn--ghost'
+                filter === option ? 'btn--primary' : 'btn--ghost'
               }`}
-              aria-pressed={filter === option.value}
+              aria-pressed={filter === option}
             >
-              {option.label}
+              {t.projectsPage.filters[option]}
             </button>
           ))}
         </div>

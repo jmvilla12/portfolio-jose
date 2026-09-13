@@ -1,21 +1,16 @@
-// Portfolio configuration
+// Portfolio configuration.
+//
+// Only language-independent values live here. Anything that would read
+// differently in French (role, tagline, availability, nav labels) is in the
+// dictionaries under `src/i18n/`.
+
+import type { Locale } from '@i18n/types'
 
 export const APP_CONFIG = {
   name: 'Jose Villa',
   shortName: 'JV',
   firstName: 'Jose',
   lastName: 'Villa',
-  role: 'Software Engineer',
-  roleAlt: 'Mechatronics background',
-  location: 'Lille, Hauts-de-France',
-  education: 'M2 Intelligent, Secure & Communicating Systems — IMT Nord Europe',
-  tagline:
-    'Software engineer finishing an M2 in intelligent, secure and communicating systems at IMT Nord Europe. I build data-ingestion backends, product frontends and embedded systems — most recently at LeanPay, a B2B fintech in Lille.',
-  availability: {
-    status: 'Open to alternance — Sept. 2026',
-    detail:
-      'Looking for a 10–12 month alternance (apprenticeship) starting September 2026. Rhythm from September to February: Monday–Wednesday at school, Thursday–Friday in company; full-time in company from March 2027.',
-  },
 } as const
 
 export const SOCIAL_LINKS = {
@@ -26,6 +21,7 @@ export const SOCIAL_LINKS = {
   phoneHref: 'tel:+33743549042',
 } as const
 
+/** App paths, without the locale segment — add it with `useLocalePath`. */
 export const ROUTES = {
   home: '/',
   about: '/about',
@@ -34,22 +30,47 @@ export const ROUTES = {
   cv: '/cv',
 } as const
 
+/** `key` indexes `t.nav`, so the labels follow the active language. */
 export const NAV_ITEMS = [
-  { label: 'Home', to: ROUTES.home },
-  { label: 'Projects', to: ROUTES.projects },
-  { label: 'About', to: ROUTES.about },
-  { label: 'Contact', to: ROUTES.contact },
+  { key: 'home', to: ROUTES.home },
+  { key: 'projects', to: ROUTES.projects },
+  { key: 'about', to: ROUTES.about },
+  { key: 'contact', to: ROUTES.contact },
 ] as const
 
-export const CV_CONFIG = {
-  path: '/CV_Jose_FR.pdf',
-  downloadName: 'CV_Jose_Villa_Romero.pdf',
-} as const
+// --- CV ---------------------------------------------------------------------
 
-// Figures shown in the hero strip — keep in sync with the data files.
-export const STATS = [
-  { value: '2+', label: 'Years building software' },
-  { value: '5', label: 'Languages shipped to prod' },
-  { value: '3', label: 'Spoken languages (ES/EN/FR)' },
-  { value: 'Sept. 2026', label: 'Available for alternance' },
-] as const
+/**
+ * The CV PDFs that actually exist in `public/`. A locale missing from this map
+ * falls back to `CV_FALLBACK_*`, and the CV page then labels the document with
+ * the language it really served — the site never offers a translation it does
+ * not have. Adding `Jose_Villa_CV_EN.pdf` to `public/` is a one-line change.
+ */
+const CV_FILES: Partial<Record<Locale, string>> = {
+  en: 'Jose_Villa_CV_EN.pdf',
+  fr: 'Jose_Villa_CV_FR.pdf',
+  // `Jose_Villa_CV_ES.pdf` is already in `public/`; it gets wired up here the
+  // moment 'es' joins LOCALES.
+}
+
+const CV_FALLBACK_LOCALE: Locale = 'en'
+const CV_FALLBACK_FILE = 'Jose_Villa_CV_EN.pdf'
+
+export interface ResolvedCV {
+  path: string
+  downloadName: string
+  /** Language of the document served, which may not be the UI language. */
+  documentLocale: Locale
+}
+
+export const resolveCV = (locale: Locale): ResolvedCV => {
+  const file = CV_FILES[locale]
+
+  return file
+    ? { path: `/${file}`, downloadName: file, documentLocale: locale }
+    : {
+        path: `/${CV_FALLBACK_FILE}`,
+        downloadName: CV_FALLBACK_FILE,
+        documentLocale: CV_FALLBACK_LOCALE,
+      }
+}
