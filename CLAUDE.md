@@ -34,7 +34,7 @@ No page contains hardcoded copy. Content is split by whether it would read diffe
 
 - `src/constants/index.ts` — language-independent config: `APP_CONFIG` (name only), `SOCIAL_LINKS`, `ROUTES`, `NAV_ITEMS`, `resolveCV`.
 - `src/data/index.ts` — language-independent facts: ids, `Period` dates, company and institution names, tech stacks, URLs. Typed against the `*Base` interfaces in `src/types/index.ts`.
-- `src/i18n/en.ts` and `src/i18n/fr.ts` — every string a reader sees, including all prose from the data entries (`position`, `description`, `highlights`, `title`, …).
+- `src/i18n/en.ts`, `src/i18n/fr.ts` and `src/i18n/es.ts` — every string a reader sees, including all prose from the data entries (`position`, `description`, `highlights`, `title`, …).
 
 `useContent()` merges the two halves by id and hands pages ready-made `Experience[]`, `Project[]` and friends. To change what the site says, edit the dictionaries; to change a date, a tech stack or a URL, edit `src/data/index.ts`.
 
@@ -63,11 +63,11 @@ Aliases (`@/`, `@src`, `@assets`, `@components`, `@pages`, `@hooks`, `@i18n`, `@
 
 ### Internationalisation
 
-English is the default; French is complete. No i18n library — the content has no plurals or interpolation, so a typed dictionary buys a stronger guarantee for 0 KB.
+English is the default; French and Spanish are complete. No i18n library — the content has no plurals or interpolation, so a typed dictionary buys a stronger guarantee for 0 KB.
 
-`src/i18n/en.ts` is the source of truth for the **shape**: `type Dictionary = typeof en`, and `fr.ts` declares `export const fr: Dictionary`. A missing or misspelled key is a `tsc -b` error, never a silent fallback to English. `en.ts` therefore must **not** use `as const` — the values have to widen to `string` or no translation could differ from the English literal.
+`src/i18n/en.ts` is the source of truth for the **shape**: `type Dictionary = typeof en`, and `fr.ts` / `es.ts` declare `export const fr: Dictionary` / `export const es: Dictionary`. A missing or misspelled key is a `tsc -b` error, never a silent fallback to English. `en.ts` therefore must **not** use `as const` — the values have to widen to `string` or no translation could differ from the English literal.
 
-- **URLs carry the locale**: `/en/projects`, `/fr/projects`. `/` redirects to the detected locale and any un-prefixed path (`/about`) is redirected rather than 404'd, so old links keep working.
+- **URLs carry the locale**: `/en/projects`, `/fr/projects`, `/es/projects`. `/` redirects to the detected locale and any un-prefixed path (`/about`) is redirected rather than 404'd, so old links keep working.
 - **Precedence**: URL > `localStorage` > `navigator.languages` > `en`. A shared `/fr/...` link stays French whatever the visitor's browser asks for.
 - **Never use bare `<Link>`/`<NavLink>`** — use `LocaleLink`/`LocaleNavLink` from `@i18n/index`, or a French reader lands back in English.
 - `I18nProvider` mirrors the locale onto `<html lang>` and emits the `hreflang` alternates (React 19 hoists them to `<head>` — no helmet library).

@@ -49,8 +49,7 @@ export const NAV_ITEMS = [
 const CV_FILES: Partial<Record<Locale, string>> = {
   en: 'Jose_Villa_CV_EN.pdf',
   fr: 'Jose_Villa_CV_FR.pdf',
-  // `Jose_Villa_CV_ES.pdf` is already in `public/`; it gets wired up here the
-  // moment 'es' joins LOCALES.
+  es: 'Jose_Villa_CV_ES.pdf',
 }
 
 const CV_FALLBACK_LOCALE: Locale = 'en'
