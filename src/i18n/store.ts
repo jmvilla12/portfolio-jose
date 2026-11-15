@@ -110,37 +110,27 @@ export const useContent = () => {
 
   return useMemo(
     () => ({
-      experience: EXPERIENCE.map(
-        (base): Experience => ({
-          ...base,
-          ...t.experience[base.id],
-        })
-      ),
-      projects: PROJECTS.map(
-        (base): Project => ({
-          ...base,
-          ...t.projects[base.id],
-        })
-      ),
-      education: EDUCATION.map(
-        (base): Education => ({
-          ...base,
-          ...t.education[base.id],
-        })
-      ),
-      credentials: CREDENTIALS.map(
-        (base): Credential => ({
-          ...base,
-          ...t.credentials[base.id],
-        })
-      ),
+      experience: EXPERIENCE.map((base): Experience => ({
+        ...base,
+        ...t.experience[base.id],
+      })),
+      projects: PROJECTS.map((base): Project => ({
+        ...base,
+        ...t.projects[base.id],
+      })),
+      education: EDUCATION.map((base): Education => ({
+        ...base,
+        ...t.education[base.id],
+      })),
+      credentials: CREDENTIALS.map((base): Credential => ({
+        ...base,
+        ...t.credentials[base.id],
+      })),
       awards: AWARDS.map((base): Award => ({ ...base, ...t.awards[base.id] })),
-      skillGroups: SKILL_GROUPS.map(
-        (base): SkillGroup => ({
-          ...base,
-          title: t.skillGroups[base.id],
-        })
-      ),
+      skillGroups: SKILL_GROUPS.map((base): SkillGroup => ({
+        ...base,
+        title: t.skillGroups[base.id],
+      })),
       spokenLanguages: SPOKEN_LANGUAGES.map(id => ({
         id,
         ...t.spokenLanguages[id],

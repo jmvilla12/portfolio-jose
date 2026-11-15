@@ -12,7 +12,11 @@ import { APP_CONFIG, ROUTES } from '@constants/index'
 const Home = () => {
   const { t } = useI18n()
   const { experience, skillGroups } = useContent()
-  const featured = experience.slice(0, 3)
+  // LeanPay first (current), then the embedded work, then the frontend role.
+  const featuredIds = ['leanpay', 'met-group', 'alta-ai']
+  const featured = featuredIds.flatMap(id =>
+    experience.filter(item => item.id === id)
+  )
 
   return (
     <>

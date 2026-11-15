@@ -61,13 +61,13 @@ export const en = {
 
   // --- Profile ------------------------------------------------------------
   profile: {
-    role: 'Software Engineer',
-    roleAlt: 'Mechatronics background',
+    role: 'Embedded, IoT & Security Engineer',
+    roleAlt: 'Mechatronics + software',
     location: 'Lille, Hauts-de-France',
     city: 'Lille',
     region: 'Hauts-de-France',
     tagline:
-      'Software engineer finishing an M2 in intelligent, secure and communicating systems at IMT Nord Europe. I build data-ingestion backends, product frontends and embedded systems — most recently at LeanPay, a B2B fintech in Lille.',
+      'Engineer finishing an M2 in intelligent, secure and communicating systems at IMT Nord Europe. I work on embedded systems, IoT and network security — from CAN bus telemetry on vehicles to an MQTT sensor node — and I write the software around them, most recently at LeanPay, a B2B fintech in Lille.',
     availabilityStatus: 'Open to an internship — Feb. 2027',
     availabilityDetail:
       'Looking for a six-month engineering internship starting 15 February 2027, in France — Lille preferred — or elsewhere in the EU. IMT Nord Europe requires a minimum of 24 weeks, so the window runs February to August 2027. What I want after it is a permanent role in Europe.',
@@ -89,15 +89,15 @@ export const en = {
     skillsEyebrow: '02 — Toolkit',
     skillsTitle: 'What I build with',
     skillsLead:
-      'A software core with a genuine hardware background underneath — the two reinforce each other rather than compete.',
+      'An embedded and hardware core with software and security on top — the two reinforce each other rather than compete.',
     ctaTitle: 'Looking for an intern?',
   },
 
   // --- About --------------------------------------------------------------
   about: {
     eyebrow: 'About',
-    title: 'Software engineer with a mechatronics past',
-    lead: "I started in mechatronics in Colombia — engines, PCBs, CAN buses — and moved into software without leaving the hardware behind. Today I'm finishing an M2 in intelligent, secure and communicating systems at IMT Nord Europe, in Lille.",
+    title: 'Mechatronics engineer building connected systems',
+    lead: "I started in mechatronics in Colombia — engines, PCBs, CAN buses — and added software and security on top without leaving the hardware behind. Today I'm finishing an M2 in intelligent, secure and communicating systems at IMT Nord Europe, in Lille.",
     experienceEyebrow: '01 — Experience',
     experienceTitle: 'Full history',
     educationEyebrow: '02 — Education',
@@ -261,6 +261,36 @@ export const en = {
   } satisfies Record<ExperienceId, ExperienceCopy>,
 
   projects: {
+    temphumix: {
+      title: 'TempHumiX — Connected Temperature and Humidity Sensor',
+      context: 'IoT / IIoT course project — IMT Nord Europe',
+      description:
+        'A connected object built end to end: an Arduino UNO R4 WiFi reads a DHT22 sensor and publishes over MQTT, with a Python desktop app that controls the device and archives its measurements. Designed in simulation first, then ported to real hardware.',
+      highlights: [
+        'Cooperative firmware scheduler in C/C++, with Wi-Fi, an NTP-synced clock and an MQTT client that publishes only when a value changes.',
+        'Captured MQTT sessions in Wireshark and showed the password travels in clear on port 1883; recommended MQTT over TLS.',
+        'Reviewed the security and architecture of an industrial 5G router (Teltonika RUTX50) and of the Mosquitto broker configuration.',
+        'PySide6 desktop app with SQLite archiving and time-series curves.',
+      ],
+    },
+    'air-levitation': {
+      title: 'Air-Levitation Control in LabVIEW',
+      context: 'Control Systems IV — Universidad Tecnológica de Pereira',
+      description:
+        "Closed-loop control of an expanded-polystyrene ball held in a vertical tube by a PC fan, with the ball's height measured by an ultrasonic sensor. Acquisition, controller and interface all run in LabVIEW.",
+    },
+    'tank-plc': {
+      title: 'Two-Tank Hydraulic System Control',
+      context: 'Control Systems II — Universidad Tecnológica de Pereira',
+      description:
+        'Control of a two-tank hydraulic system, with a PLC configured to run the control.',
+    },
+    'pulse-sensor': {
+      title: 'Heart-Rate Sensor',
+      context: 'Instrumentation — Universidad Tecnológica de Pereira',
+      description:
+        'A pulse-measurement circuit designed and simulated in Proteus first, then built for real on a breadboard.',
+    },
     'recycling-map': {
       title: 'Recycling Collection Points',
       context: 'Challenge Entreprendre — inter-school innovation challenge',

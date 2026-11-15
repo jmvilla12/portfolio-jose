@@ -77,6 +77,39 @@ export const EXPERIENCE: ExperienceBase[] = [
 
 export const PROJECTS: ProjectBase[] = [
   {
+    id: 'temphumix',
+    period: { start: '2026-11' },
+    technologies: [
+      'C/C++',
+      'Arduino UNO R4 WiFi',
+      'MQTT',
+      'Wireshark',
+      'Python',
+      'PySide6',
+      'SQLite',
+    ],
+    category: 'embedded',
+    githubUrl: 'https://github.com/jmvilla12/IOT_JMVR',
+  },
+  {
+    id: 'air-levitation',
+    period: { start: '2022-04', end: '2022-05' },
+    technologies: ['LabVIEW', 'Ultrasonic sensor', 'Closed-loop control'],
+    category: 'embedded',
+  },
+  {
+    id: 'tank-plc',
+    period: { start: '2021-05' },
+    technologies: ['PLC', 'Process control'],
+    category: 'embedded',
+  },
+  {
+    id: 'pulse-sensor',
+    period: { start: '2020-05' },
+    technologies: ['Proteus', 'Analog electronics', 'Breadboard'],
+    category: 'embedded',
+  },
+  {
     id: 'recycling-map',
     period: { start: '2026-02' },
     technologies: ['TypeScript', 'React', 'Teamwork'],
@@ -187,6 +220,48 @@ export const SPOKEN_LANGUAGES: SpokenLanguageId[] = ['es', 'en', 'fr']
 
 export const SKILL_GROUPS: SkillGroupBase[] = [
   {
+    id: 'embedded',
+    skills: [
+      'C',
+      'C++',
+      'MicroPython',
+      'CAN bus',
+      'Qt6 / QML',
+      'CMake',
+      'MATLAB',
+      'Simulink',
+      'LabVIEW',
+      'PID control',
+      'Pixhawk',
+      'Microcontrollers',
+    ],
+  },
+  {
+    id: 'security',
+    skills: [
+      'Stormshield CSNA',
+      'Firewall management',
+      'VPN / SSL',
+      'NAT',
+      'Linux',
+      'Bash',
+    ],
+  },
+  {
+    id: 'cad-simulation',
+    skills: [
+      'SolidWorks',
+      'Autodesk Inventor',
+      'Fusion 360',
+      'AutoCAD',
+      'ANSYS (CFD)',
+      'FEA',
+      'Generative design',
+      'Altium Designer',
+      'FDM 3D printing',
+    ],
+  },
+  {
     id: 'frontend',
     skills: [
       'TypeScript',
@@ -229,48 +304,6 @@ export const SKILL_GROUPS: SkillGroupBase[] = [
       'GitLab CI',
       'Scrum',
       'Git',
-    ],
-  },
-  {
-    id: 'security',
-    skills: [
-      'Stormshield CSNA',
-      'Firewall management',
-      'VPN / SSL',
-      'NAT',
-      'Linux',
-      'Bash',
-    ],
-  },
-  {
-    id: 'embedded',
-    skills: [
-      'C',
-      'C++',
-      'MicroPython',
-      'CAN bus',
-      'Qt6 / QML',
-      'CMake',
-      'MATLAB',
-      'Simulink',
-      'LabVIEW',
-      'PID control',
-      'Pixhawk',
-      'Microcontrollers',
-    ],
-  },
-  {
-    id: 'cad-simulation',
-    skills: [
-      'SolidWorks',
-      'Autodesk Inventor',
-      'Fusion 360',
-      'AutoCAD',
-      'ANSYS (CFD)',
-      'FEA',
-      'Generative design',
-      'Altium Designer',
-      'FDM 3D printing',
     ],
   },
   {
