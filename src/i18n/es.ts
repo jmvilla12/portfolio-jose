@@ -42,13 +42,13 @@ export const es: Dictionary = {
 
   // --- Profile ------------------------------------------------------------
   profile: {
-    role: 'Ingeniero de software',
-    roleAlt: 'Base en mecatrónica',
+    role: 'Ingeniero en sistemas embebidos, IoT y seguridad',
+    roleAlt: 'Mecatrónica + software',
     location: 'Lille, Hauts-de-France',
     city: 'Lille',
     region: 'Hauts-de-France',
     tagline:
-      'Ingeniero de software terminando un M2 en sistemas inteligentes, seguros y comunicantes en IMT Nord Europe. Construyo backends de ingesta de datos, frontends de producto y sistemas embebidos — lo más reciente en LeanPay, una fintech B2B de Lille.',
+      'Ingeniero terminando un M2 en sistemas inteligentes, seguros y comunicantes en IMT Nord Europe. Trabajo en sistemas embebidos, IoT y seguridad de redes —desde telemetría por bus CAN en vehículos hasta un nodo sensor MQTT— y escribo el software que los rodea, lo más reciente en LeanPay, una fintech B2B de Lille.',
     availabilityStatus: 'Disponible para prácticas — feb. 2027',
     availabilityDetail:
       'Busco unas prácticas de ingeniería de seis meses a partir del 15 de febrero de 2027, en Francia —preferiblemente en Lille— o en otro país de la UE. IMT Nord Europe exige un mínimo de 24 semanas, así que la ventana va de febrero a agosto de 2027. Después de eso busco un puesto permanente en Europa.',
@@ -70,15 +70,15 @@ export const es: Dictionary = {
     skillsEyebrow: '02 — Herramientas',
     skillsTitle: 'Con qué construyo',
     skillsLead:
-      'Un núcleo de software con una base real de hardware debajo — se refuerzan en lugar de competir.',
+      'Un núcleo embebido y de hardware, con software y seguridad encima — se refuerzan en lugar de competir.',
     ctaTitle: '¿Buscas un estudiante en prácticas?',
   },
 
   // --- About --------------------------------------------------------------
   about: {
     eyebrow: 'Sobre mí',
-    title: 'Ingeniero de software con pasado en mecatrónica',
-    lead: 'Empecé en mecatrónica en Colombia —motores, circuitos impresos, buses CAN— y pasé al software sin dejar atrás el hardware. Hoy termino un M2 en sistemas inteligentes, seguros y comunicantes en IMT Nord Europe, en Lille.',
+    title: 'Ingeniero mecatrónico que construye sistemas conectados',
+    lead: 'Empecé en mecatrónica en Colombia —motores, circuitos impresos, buses CAN— y añadí software y seguridad encima sin dejar atrás el hardware. Hoy termino un M2 en sistemas inteligentes, seguros y comunicantes en IMT Nord Europe, en Lille.',
     experienceEyebrow: '01 — Experiencia',
     experienceTitle: 'Trayectoria completa',
     educationEyebrow: '02 — Formación',
@@ -243,6 +243,36 @@ export const es: Dictionary = {
   },
 
   projects: {
+    temphumix: {
+      title: 'TempHumiX — Sensor conectado de temperatura y humedad',
+      context: 'Proyecto de IoT / IIoT — IMT Nord Europe',
+      description:
+        'Un objeto conectado de punta a punta: una Arduino UNO R4 WiFi lee un sensor DHT22 y publica por MQTT, con una aplicación de escritorio en Python que controla el dispositivo y archiva las mediciones. Diseñado primero en simulación y luego llevado al hardware real.',
+      highlights: [
+        'Planificador cooperativo en C/C++, con Wi-Fi, reloj sincronizado por NTP y un cliente MQTT que publica solo cuando un valor cambia.',
+        'Sesiones MQTT capturadas en Wireshark: la contraseña viaja en claro por el puerto 1883; recomendé MQTT sobre TLS.',
+        'Revisión de seguridad y arquitectura de un router 5G industrial (Teltonika RUTX50) y de la configuración del broker Mosquitto.',
+        'Aplicación de escritorio en PySide6 con archivado en SQLite y curvas temporales.',
+      ],
+    },
+    'air-levitation': {
+      title: 'Control de levitación por aire en LabVIEW',
+      context: 'Sistemas de Control IV — Universidad Tecnológica de Pereira',
+      description:
+        'Control en lazo cerrado de una bola de icopor (poliestireno expandido) sostenida en un tubo vertical por un ventilador de PC, con la altura de la bola medida por un sensor ultrasónico. Adquisición, controlador e interfaz corren en LabVIEW.',
+    },
+    'tank-plc': {
+      title: 'Control de un sistema hidráulico de dos tanques',
+      context: 'Sistemas de Control II — Universidad Tecnológica de Pereira',
+      description:
+        'Control de un sistema hidráulico de dos tanques, con un PLC configurado para ejecutar el control.',
+    },
+    'pulse-sensor': {
+      title: 'Sensor de pulso cardíaco',
+      context: 'Instrumentación — Universidad Tecnológica de Pereira',
+      description:
+        'Un circuito de medición del pulso diseñado y simulado primero en Proteus, y luego montado de verdad en una protoboard.',
+    },
     'recycling-map': {
       title: 'Puntos de recolección de reciclaje',
       context: 'Challenge Entreprendre — reto de innovación interescuelas',

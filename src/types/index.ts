@@ -28,13 +28,13 @@ export interface Period {
 // compiling until it has been translated.
 
 export type ExperienceId =
-  | 'leanpay'
-  | 'alta-ai'
-  | 'cidt-cinnov'
-  | 'met-group'
-  | 'mecabot'
+  'leanpay' | 'alta-ai' | 'cidt-cinnov' | 'met-group' | 'mecabot'
 
 export type ProjectId =
+  | 'temphumix'
+  | 'air-levitation'
+  | 'tank-plc'
+  | 'pulse-sensor'
   | 'recycling-map'
   | 'ecommerce-microservices'
   | 'usv-coverage'
@@ -46,16 +46,10 @@ export type ProjectId =
 export type EducationId = 'imt' | 'utp' | 'its'
 
 export type CredentialId =
-  | 'stormshield'
-  | 'talento-tech'
-  | 'fullstack-utp'
-  | 'python-michigan'
+  'stormshield' | 'talento-tech' | 'fullstack-utp' | 'python-michigan'
 
 export type AwardId =
-  | 'challenge-entreprendre'
-  | 'colfuturo'
-  | 'distinguished'
-  | 'cooeducar'
+  'challenge-entreprendre' | 'colfuturo' | 'distinguished' | 'cooeducar'
 
 export type SkillGroupId =
   | 'frontend'

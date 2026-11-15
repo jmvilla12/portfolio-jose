@@ -42,13 +42,13 @@ export const fr: Dictionary = {
 
   // --- Profile ------------------------------------------------------------
   profile: {
-    role: 'Ingénieur logiciel',
-    roleAlt: 'Formation en mécatronique',
+    role: 'Ingénieur systèmes embarqués, IoT & sécurité',
+    roleAlt: 'Mécatronique + logiciel',
     location: 'Lille, Hauts-de-France',
     city: 'Lille',
     region: 'Hauts-de-France',
     tagline:
-      "Ingénieur logiciel en fin de M2 Systèmes Intelligents, Sûrs et Communicants à IMT Nord Europe. Je développe des backends d'ingestion de données, des frontends produit et des systèmes embarqués — dernièrement chez LeanPay, une fintech B2B lilloise.",
+      "Ingénieur en fin de M2 Systèmes Intelligents, Sûrs et Communicants à IMT Nord Europe. Je travaille sur les systèmes embarqués, l'IoT et la sécurité des réseaux — de la télémétrie bus CAN sur véhicules à un nœud capteur MQTT — et je développe le logiciel autour, dernièrement chez LeanPay, une fintech B2B lilloise.",
     availabilityStatus: 'Ouvert à un stage — févr. 2027',
     availabilityDetail:
       "À la recherche d'un stage d'ingénieur de six mois à partir du 15 février 2027, en France — Lille de préférence — ou ailleurs dans l'UE. IMT Nord Europe exige un minimum de 24 semaines : la fenêtre va donc de février à août 2027. Mon objectif ensuite est un CDI ou un CDD en Europe.",
@@ -70,15 +70,15 @@ export const fr: Dictionary = {
     skillsEyebrow: '02 — Outils',
     skillsTitle: 'Ce avec quoi je construis',
     skillsLead:
-      'Un cœur logiciel avec une vraie base matérielle en dessous — les deux se renforcent au lieu de se concurrencer.',
+      'Un cœur embarqué et matériel, avec le logiciel et la sécurité par-dessus — les deux se renforcent au lieu de se concurrencer.',
     ctaTitle: 'Vous cherchez un stagiaire ?',
   },
 
   // --- About --------------------------------------------------------------
   about: {
     eyebrow: 'À propos',
-    title: 'Ingénieur logiciel avec un passé en mécatronique',
-    lead: "J'ai commencé par la mécatronique en Colombie — moteurs, circuits imprimés, bus CAN — et je suis passé au logiciel sans abandonner le matériel. Aujourd'hui je termine un M2 Systèmes Intelligents, Sûrs et Communicants à IMT Nord Europe, à Lille.",
+    title: "Ingénieur mécatronicien, aujourd'hui sur les systèmes connectés",
+    lead: "J'ai commencé par la mécatronique en Colombie — moteurs, circuits imprimés, bus CAN — puis j'ai ajouté le logiciel et la sécurité sans abandonner le matériel. Aujourd'hui je termine un M2 Systèmes Intelligents, Sûrs et Communicants à IMT Nord Europe, à Lille.",
     experienceEyebrow: '01 — Expérience',
     experienceTitle: 'Parcours complet',
     educationEyebrow: '02 — Formation',
@@ -244,6 +244,36 @@ export const fr: Dictionary = {
   },
 
   projects: {
+    temphumix: {
+      title: "TempHumiX — Capteur connecté de température et d'humidité",
+      context: 'Projet IoT / IIoT — IMT Nord Europe',
+      description:
+        "Un objet connecté de bout en bout : une Arduino UNO R4 WiFi lit un capteur DHT22 et publie en MQTT, avec une application de bureau Python qui pilote le dispositif et archive les mesures. Conçu d'abord en simulation, puis porté sur le matériel réel.",
+      highlights: [
+        "Ordonnanceur coopératif en C/C++, avec Wi-Fi, horloge synchronisée par NTP et client MQTT qui ne publie que lorsqu'une valeur change.",
+        'Sessions MQTT capturées dans Wireshark : le mot de passe circule en clair sur le port 1883 ; recommandation de MQTT sur TLS.',
+        "Revue de sécurité et d'architecture d'un routeur 5G industriel (Teltonika RUTX50) et de la configuration du broker Mosquitto.",
+        'Application de bureau PySide6 avec archivage SQLite et courbes temporelles.',
+      ],
+    },
+    'air-levitation': {
+      title: "Contrôle par lévitation d'air sous LabVIEW",
+      context: 'Systèmes de contrôle IV — Universidad Tecnológica de Pereira',
+      description:
+        "Asservissement en boucle fermée d'une balle en polystyrène expansé maintenue dans un tube vertical par un ventilateur de PC, avec la hauteur de la balle mesurée par un capteur à ultrasons. Acquisition, régulateur et interface tournent tous sous LabVIEW.",
+    },
+    'tank-plc': {
+      title: "Contrôle d'un système hydraulique à deux réservoirs",
+      context: 'Systèmes de contrôle II — Universidad Tecnológica de Pereira',
+      description:
+        "Commande d'un système hydraulique à deux réservoirs, avec un automate (PLC) configuré pour exécuter la régulation.",
+    },
+    'pulse-sensor': {
+      title: 'Capteur de fréquence cardiaque',
+      context: 'Instrumentation — Universidad Tecnológica de Pereira',
+      description:
+        "Un circuit de mesure du pouls conçu et simulé d'abord sous Proteus, puis réalisé pour de vrai sur une plaque d'essai.",
+    },
     'recycling-map': {
       title: 'Points de collecte de recyclage',
       context: "Challenge Entreprendre — challenge d'innovation inter-écoles",
