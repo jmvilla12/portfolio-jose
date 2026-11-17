@@ -89,7 +89,7 @@ export const PROJECTS: ProjectBase[] = [
       'SQLite',
     ],
     category: 'embedded',
-    githubUrl: 'https://github.com/jmvilla12/IOT_JMVR',
+    // githubUrl intentionally omitted for now.
   },
   {
     id: 'air-levitation',
